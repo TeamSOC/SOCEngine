@@ -11,10 +11,10 @@ using namespace Rendering::Factory;
 const DefaultShaders::Shaders& 
 DefaultShaders::LoadDefaultSahder(
 	Device::DirectX& dx, ShaderManager& shaderMgr,
-	DefaultRenderType renderType, uint bufferFlag,
+	DefaultRenderType renderType, uint32 bufferFlag,
 	const std::vector<ShaderMacro>* macros)
 {
-	uint key = MakeKey(bufferFlag, renderType);
+	uint32 key = MakeKey(bufferFlag, renderType);
 
 	// check exist
 	{
@@ -73,19 +73,19 @@ void DefaultShaders::Initialize(Device::DirectX& dx, ShaderManager& shaderMgr)
 		macros.push_back(msaaMacro);	
 	}
 
-	for(uint i=0; i< static_cast<uint>(DefaultRenderType::MAX_NUM); ++i)
+	for(uint32 i=0; i< static_cast<uint32>(DefaultRenderType::MAX_NUM); ++i)
 	{
 		DefaultRenderType type = static_cast<DefaultRenderType>(i);
 
 		LoadDefaultSahder(	dx, shaderMgr, type,
-							static_cast<uint>(DefaultVertexInputTypeFlag::UV0) | 
-							static_cast<uint>(DefaultVertexInputTypeFlag::NORMAL),
+							static_cast<uint32>(DefaultVertexInputTypeFlag::UV0) | 
+							static_cast<uint32>(DefaultVertexInputTypeFlag::NORMAL),
 							&macros	);
 
 		LoadDefaultSahder(	dx, shaderMgr, type,
-							static_cast<uint>(DefaultVertexInputTypeFlag::UV0)		| 
-							static_cast<uint>(DefaultVertexInputTypeFlag::NORMAL)	| 
-							static_cast<uint>(DefaultVertexInputTypeFlag::TANGENT),
+							static_cast<uint32>(DefaultVertexInputTypeFlag::UV0)		| 
+							static_cast<uint32>(DefaultVertexInputTypeFlag::NORMAL)	| 
+							static_cast<uint32>(DefaultVertexInputTypeFlag::TANGENT),
 							&macros	);
 	}
 }
@@ -95,19 +95,19 @@ void DefaultShaders::Destroy()
 	_shaders.clear();
 }
 
-const DefaultShaders::Shaders& DefaultShaders::Add(uint key, const ShaderGroup& shaders)
+const DefaultShaders::Shaders& DefaultShaders::Add(uint32 key, const ShaderGroup& shaders)
 {
 	_shaders.insert(std::make_pair(key, shaders));
 	return _shaders[key];
 }
 
-bool DefaultShaders::Has(uint key) const
+bool DefaultShaders::Has(uint32 key) const
 {
 	auto iter = _shaders.find(key);
 	return iter != _shaders.end();
 }
 
-const DefaultShaders::Shaders& DefaultShaders::Find(uint key) const
+const DefaultShaders::Shaders& DefaultShaders::Find(uint32 key) const
 {
 	const auto iter = _shaders.find(key);
 	assert(iter != _shaders.end());
@@ -115,7 +115,7 @@ const DefaultShaders::Shaders& DefaultShaders::Find(uint key) const
 	return iter->second;
 }
 
-const DefaultShaders::Shaders& DefaultShaders::Find(uint bufferFlag, DefaultRenderType renderType) const
+const DefaultShaders::Shaders& DefaultShaders::Find(uint32 bufferFlag, DefaultRenderType renderType) const
 {
 	return Find(MakeKey(bufferFlag, renderType));
 }
@@ -156,28 +156,28 @@ void DefaultShaders::MakeDefaultShaderMainFuncNames(
 	outPSMain	= psMain;
 }
 
-uint DefaultShaders::MakeKey(	uint bufferFlag,
+uint32 DefaultShaders::MakeKey(	uint32 bufferFlag,
 									DefaultRenderType renderType	)
 {
-	constexpr uint bitOffset = 
-		Compute_2_Exp<static_cast<uint>(BufferFlag::MAX)>::value;
+	constexpr uint32 bitOffset = 
+		Compute_2_Exp<static_cast<uint32>(BufferFlag::MAX)>::value;
 
-	return (static_cast<uint>(renderType) << bitOffset) | bufferFlag;
+	return (static_cast<uint32>(renderType) << bitOffset) | bufferFlag;
 }
 
-std::string DefaultShaders::MakeDefaultSahderFileName(DefaultRenderType renderType, uint bufferFlag) const
+std::string DefaultShaders::MakeDefaultSahderFileName(DefaultRenderType renderType, uint32 bufferFlag) const
 {
 	std::string defaultVertexInputTypeStr = "";
 
-	if(bufferFlag & (uint)DefaultVertexInputTypeFlag::NORMAL)
+	if(bufferFlag & (uint32)DefaultVertexInputTypeFlag::NORMAL)
 	{
-		if(bufferFlag & (uint)DefaultVertexInputTypeFlag::TANGENT)
+		if(bufferFlag & (uint32)DefaultVertexInputTypeFlag::TANGENT)
 			defaultVertexInputTypeStr += "T";
 
 		defaultVertexInputTypeStr += "N_";
 	}
 
-	if(bufferFlag & (uint)DefaultVertexInputTypeFlag::UV0)
+	if(bufferFlag & (uint32)DefaultVertexInputTypeFlag::UV0)
 		defaultVertexInputTypeStr += "UV0";
 
 	std::string frontFileName = "";

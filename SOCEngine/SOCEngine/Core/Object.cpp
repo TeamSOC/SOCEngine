@@ -36,7 +36,7 @@ void Object::DeleteChild(Object& child)
 	CoreConnector::SharedInstance()->GetTransformPool()->Find(_id.Literal())->DeleteChild(child.GetObjectID());
 }
 
-auto Object::FindChildUsingIndex(uint index)
+auto Object::FindChildUsingIndex(uint32 index)
 {
 	auto thisTF = CoreConnector::SharedInstance()->GetTransformPool()->Find(_id.Literal());
 
@@ -44,7 +44,7 @@ auto Object::FindChildUsingIndex(uint index)
 	return CoreConnector::SharedInstance()->GetTransformPool()->Find(id.Literal());
 }
 
-uint Object::GetChildCount() const
+uint32 Object::GetChildCount() const
 {
 	return CoreConnector::SharedInstance()->GetTransformPool()->Find(_id.Literal())->GetChildCount();
 }
@@ -66,14 +66,14 @@ void Object::HierarchyUse(bool parentUse)
 
 	Transform* thisTransform = tfPool->Find(_id.Literal());
 
-	uint childCount = thisTransform->GetChildCount();
-	for (uint i = 0; i < childCount; ++i)
+	uint32 childCount = thisTransform->GetChildCount();
+	for (uint32 i = 0; i < childCount; ++i)
 	{
 		ObjectID childID = thisTransform->GetChild(i);
 		Object* child = objPool->Find(childID);
 
 		child->_parentUse = parentUse;
-		uint childLiteralID = childID.Literal();
+		uint32 childLiteralID = childID.Literal();
 
 		if (parentUse && cantUseTFPool->Has(childLiteralID))
 		{

@@ -15,8 +15,8 @@ namespace Rendering
 		public:
 			struct InfoCBData
 			{
-				uint sourceDimension;
-				uint dummy1, dummy2, dummy3;
+				uint32 sourceDimension;
+				uint32 dummy1, dummy2, dummy3;
 			};
 
 		public:

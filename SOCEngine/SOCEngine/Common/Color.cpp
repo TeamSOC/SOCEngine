@@ -5,7 +5,7 @@ Color::Color(float _r, float _g, float _b, float _a) :
 {
 }
 
-Color::Color(uint uintColor)
+Color::Color(uint32 uintColor)
 {
 	a = static_cast<float>( (uintColor & 0b11111111000000000000000000000000) >> 24 ) / 255.0f;
 	b = static_cast<float>( (uintColor & 0b00000000111111110000000000000000) >> 16 ) / 255.0f;

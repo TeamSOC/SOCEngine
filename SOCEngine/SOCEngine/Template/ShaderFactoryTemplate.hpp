@@ -33,8 +33,8 @@ namespace Rendering
 				std::vector<D3D11_INPUT_ELEMENT_DESC> vertexDeclations;
 				bool isOnlyHasPath = false;
 
-				typedef unsigned int uint;
-				auto AddInputElementDesc = [&](const char* semanticName, uint semanticIndex, DXGI_FORMAT format, uint alignedByteOffset, D3D11_INPUT_CLASSIFICATION inputSlotClass, uint inputSlot, uint instanceDataStepRate)
+				typedef unsigned int uint32;
+				auto AddInputElementDesc = [&](const char* semanticName, uint32 semanticIndex, DXGI_FORMAT format, uint32 alignedByteOffset, D3D11_INPUT_CLASSIFICATION inputSlotClass, uint32 inputSlot, uint32 instanceDataStepRate)
 				{
 					auto MakeInputElementDesc = [&](D3D11_INPUT_ELEMENT_DESC& out)
 					{

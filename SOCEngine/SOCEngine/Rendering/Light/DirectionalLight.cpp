@@ -15,7 +15,7 @@ void DirectionalLight::UpdateFlag(const Core::Transform& transform)
 	bool isNegDirZSign = transform.GetWorldMatrix()._33 < 0.0f;
 
 	if ( (_base.GetFlag() & 0x01) != isNegDirZSign )
-		const_cast<BaseLight&>(_base).SetFlag( (_base.GetFlag() & 0xfe) | static_cast<uint>(isNegDirZSign) );
+		const_cast<BaseLight&>(_base).SetFlag( (_base.GetFlag() & 0xfe) | static_cast<uint32>(isNegDirZSign) );
 }
 
 DirectionalLight::TransformType DirectionalLight::MakeTransform(const Transform& transform) const

@@ -40,7 +40,7 @@ void ComponentSystem::UpdateBuffer(DirectX& dx,
 
 	if (meshMgr.GetHasDirtyMeshes())
 	{
-		uint value = 0xff7fffff;
+		uint32 value = 0xff7fffff;
 		float fltMin = (*(float*)&value);
 		
 		value = 0x7f7fffff;

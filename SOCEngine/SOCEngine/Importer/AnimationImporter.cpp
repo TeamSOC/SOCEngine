@@ -16,7 +16,7 @@ bool AnimationImporter::LoadAnimation(const std::string& path, std::vector<Anima
 	std::ifstream	g3dFile;
 	std::string		g3dFileFormat;
 	const std::string supportedFileFormat[] = { "g3dj", /*"g3db"*/ };
-	for (uint i = 0; i<ARRAYSIZE(supportedFileFormat); ++i)
+	for (uint32 i = 0; i<ARRAYSIZE(supportedFileFormat); ++i)
 	{
 		g3dFileFormat = supportedFileFormat[i];
 
@@ -35,7 +35,7 @@ bool AnimationImporter::LoadAnimation(const std::string& path, std::vector<Anima
 	std::streamoff length = g3dFile.tellg();
 	g3dFile.seekg(0, g3dFile.beg);
 
-	char* buffer = new char[(uint)length + 1];
+	char* buffer = new char[(uint32)length + 1];
 	{
 		g3dFile.read(buffer, length);
 		buffer[length] = '\0';
@@ -53,14 +53,14 @@ bool AnimationImporter::LoadAnimation(const std::string& path, std::vector<Anima
 		assert(document.HasMember("animations"));
 
 		const auto& animations	= document["animations"];
-		uint size				= animations.Size();
-		for (uint i = 0; i < size; ++i)
+		uint32 size				= animations.Size();
+		for (uint32 i = 0; i < size; ++i)
 		{
 			animData.id = animations[i]["id"].GetString();
 
 			const auto& bones = animations[i]["bones"];
-			uint size = bones.Size();
-			for (uint i = 0; i < size; ++i)
+			uint32 size = bones.Size();
+			for (uint32 i = 0; i < size; ++i)
 			{
 				const auto& boneNode = bones[i];
 
@@ -70,13 +70,13 @@ bool AnimationImporter::LoadAnimation(const std::string& path, std::vector<Anima
 				AnimationNode::Keyframe prevFrame;
 
 				const auto& keyframesData = boneNode["keyframes"];
-				uint keyframeCount = keyframesData.Size();
-				for (uint i = 0; i < keyframeCount; ++i)
+				uint32 keyframeCount = keyframesData.Size();
+				for (uint32 i = 0; i < keyframeCount; ++i)
 				{
 					AnimationNode::Keyframe newKeyframe;
 
 					const auto& keyframe = keyframesData[i];
-					newKeyframe.keytime = static_cast<uint>(keyframe["keytime"].GetDouble() * 1000.0);
+					newKeyframe.keytime = static_cast<uint32>(keyframe["keytime"].GetDouble() * 1000.0);
 
 					if (keyframe.HasMember("rotation"))
 					{

@@ -31,7 +31,7 @@ void PointLightShadowMapRenderer::Render(DirectX& dx, Param&& param, const TempR
 								mapResolution, mapResolution);
 
 	PixelShader::BindSamplerState(dx, SamplerStateBindIndex::DefaultSamplerState, SamplerState::Linear);
-	for (uint i = 0; i < 6; ++i)
+	for (uint32 i = 0; i < 6; ++i)
 	{
 		viewport.y = float(i) * mapResolution;
 		dx.SetViewport(viewport);

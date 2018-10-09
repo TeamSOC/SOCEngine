@@ -9,7 +9,7 @@ namespace Core
 	{
 	public:
 		static void Run(const Device::WinApp::Desc& desc,
-						const Rect<uint>& viewport,
+						const Rect<uint32>& viewport,
 						bool useMSAA, IScene* scene);
 	};
 }

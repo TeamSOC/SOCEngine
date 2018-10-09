@@ -31,7 +31,7 @@ void Frustum::Make(const Matrix& viewProjection)
 
 bool Frustum::In(const Vector3& v, float radius) const
 {
-	for(uint i=0; i<6; ++i)
+	for(uint32 i=0; i<6; ++i)
 	{
 		float dist = Plane::DotCoord(_plane[i], v);
 

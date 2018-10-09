@@ -6,13 +6,13 @@ using namespace Rendering::View;
 using namespace Math;
 
 void Texture3D::Initialize(	Device::DirectX& dx,
-				uint width, uint height, uint depth,
+				uint32 width, uint32 height, uint32 depth,
 				DXGI_FORMAT tex3DFormat, DXGI_FORMAT srvFormat, DXGI_FORMAT uavFormat,
-				uint optionBindFlag, uint mipLevels )
+				uint32 optionBindFlag, uint32 mipLevels )
 {
 	_size = Vector3(static_cast<float>(width), static_cast<float>(height), static_cast<float>(depth));
 
-	uint bindFlag = ((srvFormat != DXGI_FORMAT_UNKNOWN) ? D3D11_BIND_SHADER_RESOURCE	: 0) |
+	uint32 bindFlag = ((srvFormat != DXGI_FORMAT_UNKNOWN) ? D3D11_BIND_SHADER_RESOURCE	: 0) |
 					((mipLevels > 1) ? D3D11_BIND_RENDER_TARGET	: 0) |
 					((uavFormat != DXGI_FORMAT_UNKNOWN) ? D3D11_BIND_UNORDERED_ACCESS	: 0) | optionBindFlag;
 

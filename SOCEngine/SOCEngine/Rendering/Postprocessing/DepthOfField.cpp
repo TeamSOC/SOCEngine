@@ -11,7 +11,7 @@ using namespace Rendering::Renderer;
 using namespace Rendering::RenderState;
 using namespace Rendering::Camera;
 
-void DepthOfField::Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& renderSize)
+void DepthOfField::Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& renderSize)
 {
 	std::vector<ShaderMacro> psMacro{ dx.GetMSAAShaderMacro() };
 
@@ -69,7 +69,7 @@ void DepthOfField::Render(DirectX& dx, RenderTexture& outRT, const RenderTexture
 			copy.Render(dx, tempTextures.downScaledTextures[0], *inColorMap.GetTexture2D());
 		}
 
-		for (uint i = 0; i < 2; ++i)
+		for (uint32 i = 0; i < 2; ++i)
 			_blur.Render(dx, tempTextures.downScaledTextures[0], tempTextures.downScaledTextures[0], tempTextures.halfSizeMap);
 
 		// up

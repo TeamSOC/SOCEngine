@@ -12,7 +12,7 @@ using namespace Rendering::RenderState;
 using namespace Device;
 
 void BilateralFiltering::Initialize(Device::DirectX& dx, ShaderManager& shaderMgr,
-									const Size<uint>& size, DXGI_FORMAT format)
+									const Size<uint32>& size, DXGI_FORMAT format)
 {
 	std::vector<ShaderMacro> macros{ ShaderMacro("BLUR_VERTICAL") };
 

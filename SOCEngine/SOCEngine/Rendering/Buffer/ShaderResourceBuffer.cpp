@@ -12,8 +12,8 @@ ShaderResourceBuffer::ShaderResourceBuffer(const BaseBuffer& buf, const ShaderRe
 
 void ShaderResourceBuffer::Initialize(
 	Device::DirectX& dx,
-	uint stride, uint num, DXGI_FORMAT format,
-	const void* sysMem, uint optionalBindFlag, D3D11_USAGE usage)
+	uint32 stride, uint32 num, DXGI_FORMAT format,
+	const void* sysMem, uint32 optionalBindFlag, D3D11_USAGE usage)
 {
 	D3D11_BUFFER_DESC desc;
 	memset(&desc, 0, sizeof(D3D11_BUFFER_DESC));

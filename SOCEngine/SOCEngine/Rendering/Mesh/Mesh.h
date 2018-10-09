@@ -20,7 +20,7 @@ namespace Rendering
 
 	namespace Geometry
 	{
-		class Mesh final
+		class Mesh
 		{
 		public:
 			using ManagerType = Manager::MeshManager;
@@ -31,23 +31,23 @@ namespace Rendering
 				struct Vertices
 				{
 					const void*		data;
-					uint			count;
-					uint			byteWidth;
+					uint32			count;
+					uint32			byteWidth;
 				};
 				Vertices					vertices;
-				const std::vector<uint>&	indices;
+				const std::vector<uint32>&	indices;
 				bool						useDynamicVB	= false;
 				bool						useDynamicIB	= false;
 
 				const std::string			fileName;
 				const std::string			ibPartID;
-				uint						vbUserHashKey;
+				uint32						vbUserHashKey;
 
 				const std::vector<Shader::VertexShader::SemanticInfo>& semanticInfos;
 
 				CreateFuncArguments(const std::string& _fileName,
-					uint _vbUserHashKey, const std::string& _ibPartID,
-					const std::vector<uint>& _indices,
+					uint32 _vbUserHashKey, const std::string& _ibPartID,
+					const std::vector<uint32>& _indices,
 					const std::vector<Shader::VertexShader::SemanticInfo>& _semanticInfos)
 					:fileName(_fileName), vbUserHashKey(_vbUserHashKey), ibPartID(_ibPartID), indices(_indices), semanticInfos(_semanticInfos)
 				{}
@@ -65,7 +65,7 @@ namespace Rendering
 
 			GET_CONST_ACCESSOR(VBKey,			Buffer::BaseBuffer::Key,		_vbKey);
 			GET_CONST_ACCESSOR(IBKey,			Buffer::BaseBuffer::Key,		_ibKey);
-			GET_CONST_ACCESSOR(BufferFlag,		uint,							_bufferFlag);
+			GET_CONST_ACCESSOR(BufferFlag,		uint32,							_bufferFlag);
 
 			GET_CONST_ACCESSOR_REF(TransformCB,									_transformCB);
 
@@ -81,16 +81,16 @@ namespace Rendering
 			GET_CONST_ACCESSOR(TFChangeState,	TransformCB::ChangeState,		_tfChangeState);
 
 		private:
-			uint ComputeBufferFlag(
+			uint32 ComputeBufferFlag(
 				const std::vector<Shader::VertexShader::SemanticInfo>& semantics,
-				uint maxRecognizeBoneCount = 4) const;
+				uint32 maxRecognizeBoneCount = 4) const;
 
 		private:
 			Buffer::BaseBuffer::Key						_vbKey;
 			Buffer::BaseBuffer::Key						_ibKey;
 			MaterialID									_pbrMaterialID;
 
-			uint										_bufferFlag		= 0;
+			uint32										_bufferFlag		= 0;
 			Core::ObjectID								_objectID;
 			Buffer::ExplicitConstBuffer<TransformCB>	_transformCB;
 

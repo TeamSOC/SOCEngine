@@ -93,7 +93,7 @@ void MeshManager::UpdateTransformCB(DirectX& dx, const Core::TransformPool& tfPo
 {
 	for (auto& mesh : _mustUpdateCBMeshes)
 	{
-		uint id = mesh->GetObjectID().Literal();
+		uint32 id = mesh->GetObjectID().Literal();
 
 		const Transform* tf = tfPool.Find(id); assert(tf);
 		mesh->UpdateTransformCB(dx, *tf);

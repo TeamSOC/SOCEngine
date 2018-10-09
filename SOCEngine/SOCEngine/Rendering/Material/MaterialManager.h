@@ -38,7 +38,7 @@ namespace Rendering
 
 			template <typename MaterialType> void Delete(const std::string& key)
 			{
-				uint literalID = GetIDBookmark<MaterialType>().Find(key);
+				uint32 literalID = GetIDBookmark<MaterialType>().Find(key);
 
 				GetPool<MaterialType>().Delete(MaterialID(literalID));
 				GetIDBookmark<MaterialType>().Delete(key);

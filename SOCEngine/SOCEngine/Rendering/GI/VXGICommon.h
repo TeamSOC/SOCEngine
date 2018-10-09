@@ -20,7 +20,7 @@ namespace Rendering
 
 			union
 			{
-				uint packedSamplingCount	= (128 << 16) | 256;
+				uint32 packedSamplingCount	= (128 << 16) | 256;
 				struct
 				{
 					ushort specularSamplingCount;
@@ -29,7 +29,7 @@ namespace Rendering
 			};
 			
 			VXGIStaticInfo() = default;
-			VXGIStaticInfo(uint _dimension, float voxelizeSize)
+			VXGIStaticInfo(uint32 _dimension, float voxelizeSize)
 				:	dimension(_dimension), voxelSize(voxelizeSize / float(dimension))
 			{
 				auto Log2 = [](float v) -> float
@@ -37,8 +37,8 @@ namespace Rendering
 					return log(v) / log(2.0f);
 				};
 
-				const uint mipmapGenOffset	= 2;
-				const uint mipmapLevels		= std::max((uint)Log2((float)dimension) - mipmapGenOffset + 1, 1u);
+				const uint32 mipmapGenOffset	= 2;
+				const uint32 mipmapLevels		= std::max((uint32)Log2((float)dimension) - mipmapGenOffset + 1, 1u);
 
 				maxMipLevel = static_cast<float>(mipmapLevels);
 			}
@@ -46,7 +46,7 @@ namespace Rendering
 		struct VXGIDynamicInfo
 		{
 			Math::Vector3	startCenterWorldPos	= Math::Vector3(0.0f, 0.0f, 0.0f);
-			uint			packedNumfOfLights	= 0;
+			uint32			packedNumfOfLights	= 0;
 		};
 
 		using VXGIStaticInfoCB	= Buffer::ExplicitConstBuffer<VXGIStaticInfo>;

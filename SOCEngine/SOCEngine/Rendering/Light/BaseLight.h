@@ -21,17 +21,17 @@ namespace Rendering
 			void SetIntensity(float intensity);
 			float GetIntensity() const;
 
-			uint Get32BitMainColor() const;
+			uint32 Get32BitMainColor() const;
 
 			SET_ACCESSOR_DIRTY(Color,		const Color&,		_color);
 			SET_ACCESSOR_DIRTY(Radius,		float,				_radius);
-			SET_ACCESSOR_DIRTY(Lumen,		uint,				_lumen);
+			SET_ACCESSOR_DIRTY(Lumen,		uint32,				_lumen);
 			SET_ACCESSOR_DIRTY(Flag,		uchar,				_flag);
 			SET_ACCESSOR_DIRTY(UserFlag,	uchar,				_userFlag);
 
 			GET_CONST_ACCESSOR(Color,		const Color&,		_color);
 			GET_CONST_ACCESSOR(Radius,		float,				_radius)
-			GET_CONST_ACCESSOR(Lumen,		uint,				_lumen);
+			GET_CONST_ACCESSOR(Lumen,		uint32,				_lumen);
 			GET_CONST_ACCESSOR(Flag,		uchar,				_flag);
 			GET_CONST_ACCESSOR(UserFlag,	uchar,				_userFlag);
 
@@ -45,7 +45,7 @@ namespace Rendering
 
 			Color					_color		= Color::White();
 			float					_radius		= 10.0f;
-			uint					_lumen		= 500; //intensity
+			uint32					_lumen		= 500; //intensity
 			uchar					_flag		= 0;
 			uchar					_userFlag	= 0;
 			bool					_dirty		= true;

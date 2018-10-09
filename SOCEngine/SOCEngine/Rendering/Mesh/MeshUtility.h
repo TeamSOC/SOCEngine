@@ -53,13 +53,13 @@ namespace Rendering
 				renderQueue.DeleteAllContent();
 
 				auto& vbPerMeshes	= pool.GetPool();
-				uint vbKeyCount		= vbPerMeshes.GetSize();
+				uint32 vbKeyCount		= vbPerMeshes.GetSize();
 
-				for (uint i = 0; i < vbKeyCount; ++i)
+				for (uint32 i = 0; i < vbKeyCount; ++i)
 				{
 					auto& rawPool	= vbPerMeshes.Get(i);
-					uint meshCount	= rawPool.GetSize();
-					for (uint meshIdx = 0; meshIdx < meshCount; ++meshIdx)
+					uint32 meshCount	= rawPool.GetSize();
+					for (uint32 meshIdx = 0; meshIdx < meshCount; ++meshIdx)
 					{
 						const Mesh& mesh = rawPool.Get(meshIdx);
 

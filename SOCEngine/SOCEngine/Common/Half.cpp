@@ -44,9 +44,9 @@ Half::Half(float f)
 
 Half::operator float() const
 {
-	uint sign = (_value >> 15) & 0x1U;
-	uint exponent = (_value >> 10) & 0x1fU;
-	uint mantissa = _value & 0x3ffU;
+	uint32 sign = (_value >> 15) & 0x1U;
+	uint32 exponent = (_value >> 10) & 0x1fU;
+	uint32 mantissa = _value & 0x3ffU;
 
 	if (exponent == 0)
 	{
@@ -75,7 +75,7 @@ Half::operator float() const
 		mantissa = mantissa << 13;
 	}
 
-	union { float f; uint n; };
+	union { float f; uint32 n; };
 	n = (sign << 31) | (exponent << 23) | mantissa;
 	return f;
 }

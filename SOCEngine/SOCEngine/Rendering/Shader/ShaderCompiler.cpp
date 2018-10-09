@@ -17,11 +17,11 @@ std::string ShaderCompiler::MakeKey(const std::string& fileName, const std::stri
 	{
 		key += ":";
 
-		std::vector<uint> hashKeys;
+		std::vector<uint32> hashKeys;
 		for (auto iter = macros->begin(); iter != macros->end(); ++iter)
 		{
 			std::hash<std::string> hashString;
-			uint hashKey = hashString(iter->GetName() + ":" + iter->GetDefinition());
+			uint32 hashKey = hashString(iter->GetName() + ":" + iter->GetDefinition());
 
 			hashKeys.push_back(hashKey);
 		}
@@ -30,7 +30,7 @@ std::string ShaderCompiler::MakeKey(const std::string& fileName, const std::stri
 		for (auto iter = hashKeys.begin(); iter != hashKeys.end(); ++iter)
 		{
 			char dummy[9] = { 0, };
-			uint hashCode = (*iter);
+			uint32 hashCode = (*iter);
 			sprintf_s(dummy, "%x", hashCode);
 
 			key += dummy;
@@ -139,7 +139,7 @@ std::string ShaderCompiler::LoadShaderCode(const std::string& folderPath, const 
 	std::streamoff length = file.tellg();
 	file.seekg(0, file.beg);
 
-	char* buffer = new char[(uint)length + 1];
+	char* buffer = new char[(uint32)length + 1];
 	{
 		file.read(buffer, length);
 		buffer[length] = '\0';

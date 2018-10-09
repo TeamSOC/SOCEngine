@@ -30,12 +30,12 @@ void MipmapVoxelMap::Destroy()
 
 void MipmapVoxelMap::Mipmapping(DirectX& dx, const VoxelMap& sourceColorMap, VoxelMap& outAnisotropicMap)
 {
-	uint sourceDimension = sourceColorMap.GetSideLength();
+	uint32 sourceDimension = sourceColorMap.GetSideLength();
 
-	auto Mipmap = [&dx, sourceDimension, &infoCB = _infoCB](ComputeShader& shader, const UnorderedAccessView& sourceUAV, UnorderedAccessView& targetUAV, uint mipLevel)
+	auto Mipmap = [&dx, sourceDimension, &infoCB = _infoCB](ComputeShader& shader, const UnorderedAccessView& sourceUAV, UnorderedAccessView& targetUAV, uint32 mipLevel)
 	{
-		uint mipCoff		= 1 << mipLevel;
-		uint curDimension	= sourceDimension / mipCoff;
+		uint32 mipCoff		= 1 << mipLevel;
+		uint32 curDimension	= sourceDimension / mipCoff;
 
 		InfoCBData info;
 		info.sourceDimension = curDimension;
@@ -46,14 +46,14 @@ void MipmapVoxelMap::Mipmapping(DirectX& dx, const VoxelMap& sourceColorMap, Vox
 
 		AutoBinderCB<ComputeShader> infoCB(dx, ConstBufferBindIndex::Mipmap_InfoCB, infoCB);
 
-		uint threadCount = ((curDimension/2) + MIPMAPPING_TILE_RES_HALF - 1) / MIPMAPPING_TILE_RES_HALF;
+		uint32 threadCount = ((curDimension/2) + MIPMAPPING_TILE_RES_HALF - 1) / MIPMAPPING_TILE_RES_HALF;
 		shader.Dispatch(dx, ComputeShader::ThreadGroup(threadCount, threadCount, threadCount));
 	};
 
 	Mipmap(_baseMipmap, *sourceColorMap.GetSourceMapUAV(), *outAnisotropicMap.GetSourceMapUAV(), 0);
 	Mipmap(_anisotropicMipmap, *outAnisotropicMap.GetSourceMapUAV(), outAnisotropicMap.GetMipmapUAV(0), 1);
 
-	uint maxMipLevel = outAnisotropicMap.GetMaxMipmapLevel();
-	for(uint i=1; i<maxMipLevel; ++i)
+	uint32 maxMipLevel = outAnisotropicMap.GetMaxMipmapLevel();
+	for(uint32 i=1; i<maxMipLevel; ++i)
 		Mipmap(_anisotropicMipmap, outAnisotropicMap.GetMipmapUAV(i-1), outAnisotropicMap.GetMipmapUAV(i), i+1);
 }

@@ -62,10 +62,10 @@ Texture2DManager::Texture2DPtr Texture2DManager::LoadTextureFromFile(Device::Dir
 	D3D11_TEXTURE2D_DESC desc;
 	tex2d->GetDesc(&desc);
 
-	uint texW = desc.Width;
-	uint texH = desc.Height;
+	uint32 texW = desc.Width;
+	uint32 texH = desc.Height;
 	auto dxResource = DXSharedResource<ID3D11ShaderResourceView>(srv);
-	tex = std::make_shared<Texture2D>(ShaderResourceView(dxResource), DXSharedResource<ID3D11Texture2D>(tex2d), hasAlpha, Size<uint>(texW, texH));
+	tex = std::make_shared<Texture2D>(ShaderResourceView(dxResource), DXSharedResource<ID3D11Texture2D>(tex2d), hasAlpha, Size<uint32>(texW, texH));
 	_textures.insert(std::make_pair(name + format, tex));
 	
 	return tex;

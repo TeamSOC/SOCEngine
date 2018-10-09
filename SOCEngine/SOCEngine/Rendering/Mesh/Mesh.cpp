@@ -17,8 +17,8 @@ using namespace Intersection;
 
 void Mesh::Initialize(Device::DirectX& dx, BufferManager& bufferMgr, const CreateFuncArguments& args)
 {
-	uint vertexCount	= args.vertices.count;
-	uint indexCount		= args.indices.size();
+	uint32 vertexCount	= args.vertices.count;
+	uint32 indexCount		= args.indices.size();
 
 	_vbKey = Utility::String::MakeKey({ args.fileName, std::to_string(args.vbUserHashKey) });
 	if (bufferMgr.GetPool<VertexBuffer>().Has(_vbKey) == false)
@@ -64,9 +64,9 @@ void Mesh::Destroy()
 	_transformCB.Destroy();
 }
 
-uint Mesh::ComputeBufferFlag(const std::vector<VertexShader::SemanticInfo>& semantics, uint maxRecognizeBoneCount) const
+uint32 Mesh::ComputeBufferFlag(const std::vector<VertexShader::SemanticInfo>& semantics, uint32 maxRecognizeBoneCount) const
 {
-	uint flag = 0;
+	uint32 flag = 0;
 	for (auto iter = semantics.begin(); iter != semantics.end(); ++iter)
 	{
 		const auto& semantic = *iter;
@@ -75,33 +75,33 @@ uint Mesh::ComputeBufferFlag(const std::vector<VertexShader::SemanticInfo>& sema
 		else if (semantic.name == "TEXCOORD")
 		{
 			if (semantic.semanticIndex > 1)
-				flag |= static_cast<uint>(DefaultVertexInputTypeFlag::USERS);
+				flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::USERS);
 			else
-				flag |= static_cast<uint>(DefaultVertexInputTypeFlag::UV0) << semantic.semanticIndex;
+				flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::UV0) << semantic.semanticIndex;
 		}
 		else if (semantic.name == "NORMAL")
-			flag |= static_cast<uint>(DefaultVertexInputTypeFlag::NORMAL);
+			flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::NORMAL);
 		else if (semantic.name == "TANGENT")
-			flag |= static_cast<uint>(DefaultVertexInputTypeFlag::TANGENT);
+			flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::TANGENT);
 		else if (semantic.name == "BINORMAL")
-			flag |= static_cast<uint>(DefaultVertexInputTypeFlag::BINORMAL);
+			flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::BINORMAL);
 		else if (semantic.name == "COLOR")
-			flag |= static_cast<uint>(DefaultVertexInputTypeFlag::COLOR);
+			flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::COLOR);
 		else if (semantic.name == "BLENDWEIGHT")
 		{
 			if (semantic.semanticIndex < maxRecognizeBoneCount)
-				flag |= static_cast<uint>(DefaultVertexInputTypeFlag::BONE) << semantic.semanticIndex;
+				flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::BONE) << semantic.semanticIndex;
 			else
-				flag |= static_cast<uint>(DefaultVertexInputTypeFlag::USERS);
+				flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::USERS);
 		}
 		else
 		{
-			flag |= static_cast<uint>(DefaultVertexInputTypeFlag::USERS);
+			flag |= static_cast<uint32>(DefaultVertexInputTypeFlag::USERS);
 		}
 	}
 
 	// Error, You use undefined semantic in RenderManager::DefaultVertexInputTypeFlag.
-	assert((flag & static_cast<uint>(DefaultVertexInputTypeFlag::USERS)) == 0);
+	assert((flag & static_cast<uint32>(DefaultVertexInputTypeFlag::USERS)) == 0);
 
 	return flag;
 }
@@ -146,5 +146,5 @@ void Mesh::UpdateTransformCB(DirectX& dx, const Transform& transform)
 	_transformCB.UpdateSubResource(dx, tfCB);
 
 	_prevWorldMat = worldMat;
-	_tfChangeState = TransformCB::ChangeState((static_cast<uint>(_tfChangeState) + 1) % static_cast<uint>(TransformCB::ChangeState::MAX));
+	_tfChangeState = TransformCB::ChangeState((static_cast<uint32>(_tfChangeState) + 1) % static_cast<uint32>(TransformCB::ChangeState::MAX));
 }

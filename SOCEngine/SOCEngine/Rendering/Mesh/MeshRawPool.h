@@ -26,8 +26,8 @@ namespace Rendering
 				return const_cast<Mesh*>( static_cast<const MeshRawPool*>(this)->Find(id) );				
 			}
 
-			Mesh& Get(uint index)				{ return _meshes[index]; }
-			const Mesh& Get(uint index) const	{ return _meshes[index]; }
+			Mesh& Get(uint32 index)				{ return _meshes[index]; }
+			const Mesh& Get(uint32 index) const	{ return _meshes[index]; }
 			
 			void Delete(Core::ObjectID::LiteralType id);
 			bool Has(Core::ObjectID::LiteralType id) const;
@@ -35,7 +35,7 @@ namespace Rendering
 			void DeleteAll();
 
 			bool Empty() const { return _meshes.empty(); }
-			GET_CONST_ACCESSOR(Size, uint, _meshes.size());
+			GET_CONST_ACCESSOR(Size, uint32, _meshes.size());
 
 		private:
 			std::vector<Mesh>	_meshes;

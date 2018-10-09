@@ -27,7 +27,7 @@ SkyPreethamModelRenderer::SkyPreethamModelRenderer()
 {
 }
 
-void SkyPreethamModelRenderer::Initialize(DirectX& dx, BufferManager& bufferMgr, ShaderManager& shaderMgr, MaterialManager& materialMgr, uint resolution)
+void SkyPreethamModelRenderer::Initialize(DirectX& dx, BufferManager& bufferMgr, ShaderManager& shaderMgr, MaterialManager& materialMgr, uint32 resolution)
 {
 	std::shared_ptr<VertexShader>	vs(nullptr);
 	std::shared_ptr<GeometryShader>	gs(nullptr);
@@ -69,7 +69,7 @@ void SkyPreethamModelRenderer::Initialize(DirectX& dx, BufferManager& bufferMgr,
 
 		LightProbeParam data;
 		{
-			for (uint i = 0; i < 6; ++i)
+			for (uint32 i = 0; i < 6; ++i)
 				data.viewProjMats[i] = Matrix::Transpose(Matrix::ComputeViewProjMatrix(Vector3::Zero(), forwards[i], ups[i], projMat));
 		}
 
@@ -109,7 +109,7 @@ void SkyPreethamModelRenderer::Destroy()
 
 void SkyPreethamModelRenderer::CheckRenderAbleWithUpdateCB(DirectX& dx, const LightManager& lightMgr, const MainCamera& mainCam)
 {
-	uint lightIndex = lightMgr.GetIndexer<DirectionalLight>().Find(_directionalLightID.Literal());
+	uint32 lightIndex = lightMgr.GetIndexer<DirectionalLight>().Find(_directionalLightID.Literal());
 
 	_renderAble = lightIndex != ObjectID::UndefinedLiteral();
 	if (_renderAble == false)

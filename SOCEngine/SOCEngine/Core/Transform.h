@@ -53,10 +53,10 @@ namespace Core
 
 		void		AddChild(Transform& child);
 
-		ObjectID	GetChild(uint index)		{ return _childIDs[index];	}
-		ObjectID	GetChild(uint index) const	{ return _childIDs[index];	}
+		ObjectID	GetChild(uint32 index)		{ return _childIDs[index];	}
+		ObjectID	GetChild(uint32 index) const	{ return _childIDs[index];	}
 		void		DeleteAllChilds()			{ _childIDs.clear();		}
-		uint		GetChildCount()	const		{ return _childIDs.size();	}
+		uint32		GetChildCount()	const		{ return _childIDs.size();	}
 
 		bool		HasChild(ObjectID id) const;
 		void		DeleteChild(ObjectID id);

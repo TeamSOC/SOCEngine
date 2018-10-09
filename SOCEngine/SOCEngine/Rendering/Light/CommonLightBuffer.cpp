@@ -5,7 +5,7 @@ using namespace Rendering;
 using namespace Rendering::Light;
 using namespace Rendering::Light::Buffer;
 
-void CommonLightBuffer::Initialize(Device::DirectX& dx, uint count, const void* dummy)
+void CommonLightBuffer::Initialize(Device::DirectX& dx, uint32 count, const void* dummy)
 {
 	_colorBuffer.Initialize(dx, count, DXGI_FORMAT_R8G8B8A8_UNORM, dummy);
 	_optionalParamIndexBuffer.Initialize(dx, count, DXGI_FORMAT_R32_UINT, dummy);	
@@ -20,7 +20,7 @@ void CommonLightBuffer::Destroy()
 	_optionalParamIndexBuffer.Destroy();
 }
 
-void CommonLightBuffer::SetData(uint index, const Light::BaseLight& light, ushort shadowIndex)
+void CommonLightBuffer::SetData(uint32 index, const Light::BaseLight& light, ushort shadowIndex)
 {
 	_colorBuffer[index]					= light.Get32BitMainColor();
 	_optionalParamIndexBuffer[index]	= ComputeOptionalParamIndex(light, shadowIndex);
@@ -38,7 +38,7 @@ void CommonLightBuffer::UpdateSRBuffer(Device::DirectX& dx)
 	_optionalParamIndexBuffer.UpdateSRBuffer(dx);
 }
 
-void CommonLightBuffer::Delete(uint index)
+void CommonLightBuffer::Delete(uint32 index)
 {
 	_colorBuffer.Delete(index);
 	_optionalParamIndexBuffer.Delete(index);

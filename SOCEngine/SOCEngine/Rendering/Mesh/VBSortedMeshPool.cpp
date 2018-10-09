@@ -22,7 +22,7 @@ Mesh& VBSortedMeshPool::Add(ObjectID id, BaseBuffer::Key vbKey, Mesh& mesh)
 			
 void VBSortedMeshPool::Delete(ObjectID::LiteralType literalID)
 {
-	uint vbKey = _bookmark.Find(literalID);
+	uint32 vbKey = _bookmark.Find(literalID);
 	assert(vbKey != decltype(_bookmark)::Fail());
 
 	auto rawPool = _pool.Find(vbKey);
@@ -42,13 +42,13 @@ void VBSortedMeshPool::DeleteAll()
 
 bool VBSortedMeshPool::Has(ObjectID::LiteralType literalID) const
 {				
-	uint vbKey = _bookmark.Find(literalID);
+	uint32 vbKey = _bookmark.Find(literalID);
 	return (vbKey != decltype(_bookmark)::Fail()) ? _pool.Find(vbKey)->Has(literalID) : false;							
 }
 
 const Mesh* VBSortedMeshPool::Find(ObjectID::LiteralType literalID) const
 {
-	uint vbKey = _bookmark.Find(literalID);
+	uint32 vbKey = _bookmark.Find(literalID);
 	return (vbKey != decltype(_bookmark)::Fail()) ? _pool.Find(vbKey)->Find(literalID) : nullptr;				
 }
 

@@ -21,14 +21,14 @@ void PostProcessPipeline::Initialize(DirectX& dx, ShaderManager& shaderMgr, cons
 	{
 		_tempResultMap.Initialize(dx, renderSize, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
 
-		for (uint i = 0; i < _tempTextures.downScaledTextures.size(); ++i)
+		for (uint32 i = 0; i < _tempTextures.downScaledTextures.size(); ++i)
 		{
-			auto size = Size<uint>(renderSize.w / (1 << (i + 1)), renderSize.h / (1 << (i + 1)));
+			auto size = Size<uint32>(renderSize.w / (1 << (i + 1)), renderSize.h / (1 << (i + 1)));
 			_tempTextures.downScaledTextures[i].Initialize(dx, size, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
 		}
 
 		_tempTextures.originSizeMap.Initialize(dx, renderSize, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
-		_tempTextures.halfSizeMap.Initialize(dx, Size<uint>(renderSize.w / 2, renderSize.h / 2), DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
+		_tempTextures.halfSizeMap.Initialize(dx, Size<uint32>(renderSize.w / 2, renderSize.h / 2), DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
 		_tempTextures.minSizeMap.Initialize(dx, _tempTextures.downScaledTextures.back().GetSize(), DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
 	}
 

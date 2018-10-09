@@ -17,8 +17,8 @@ void SkyGeometry::Initialize(DirectX& dx, BufferManager& bufferMgr)
 {
 	auto CreateMeshContent = [this, &dx, &bufferMgr](const Mesh::CreateFuncArguments& args)
 	{
-		uint vbKey = String::MakeKey({"@SkyGeometryVB"});
-		uint ibKey = String::MakeKey({"@SkyGeometryIB"});
+		uint32 vbKey = String::MakeKey({"@SkyGeometryVB"});
+		uint32 ibKey = String::MakeKey({"@SkyGeometryIB"});
 
 		auto& vbPool	= bufferMgr.GetPool<VertexBuffer>();
 		auto vb			= vbPool.Find(vbKey);

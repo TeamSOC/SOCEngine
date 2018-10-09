@@ -21,7 +21,7 @@ namespace Rendering
 			public:
 				LightBufferForm() = default;
 				
-				void Initialize(Device::DirectX& dx, uint maxLightCount, DXGI_FORMAT tfFormat)
+				void Initialize(Device::DirectX& dx, uint32 maxLightCount, DXGI_FORMAT tfFormat)
 				{
 					TransformType dummy[POINT_LIGHT_BUFFER_MAX_NUM];
 					memset(dummy, 0, sizeof(TransformType) * POINT_LIGHT_BUFFER_MAX_NUM);
@@ -69,7 +69,7 @@ namespace Rendering
 						Core::ObjectID objID = light->GetObjectID();
 						const auto& tf = tfPool.Find(objID.Literal());
 						
-						uint index = indexer.Find(objID.Literal());
+						uint32 index = indexer.Find(objID.Literal());
 						_transformBuffer[index] = light->MakeTransform(*tf);
 					}
 
@@ -83,11 +83,11 @@ namespace Rendering
 					for (auto& light : dirtyParamLights)
 					{
 						Core::ObjectID objID = light->GetObjectID();
-						uint literalID = objID.Literal();
+						uint32 literalID = objID.Literal();
 
 						ushort shadowIdx	= shadowIndexer.Find(literalID);
 
-						uint index = objIDIndeer.Find(literalID);
+						uint32 index = objIDIndeer.Find(literalID);
 						_commonBuffer.SetData(index, *light->GetBase(), shadowIdx);
 					}
 
@@ -102,7 +102,7 @@ namespace Rendering
 					_mustUpdateCommonSRBuffer		=
 					_mustUpdateTransformSRBuffer	= false;
 				}
-				void Delete(uint index)
+				void Delete(uint32 index)
 				{
 					_transformBuffer.Delete(index);
 					_commonBuffer.Delete(index);
@@ -117,7 +117,7 @@ namespace Rendering
 				GET_CONST_ACCESSOR(ColorSRBuffer,				auto&, _commonBuffer.GetColorSRBuffer());
 				GET_CONST_ACCESSOR(OptionalParamIndexSRBuffer, 	auto&, _commonBuffer.GetOptionalParamIndexSRBuffer());
 
-				GET_CONST_ACCESSOR(Size, uint, _transformBuffer.GetSize());
+				GET_CONST_ACCESSOR(Size, uint32, _transformBuffer.GetSize());
 
 			protected:
 				TransformBuffer					_transformBuffer;

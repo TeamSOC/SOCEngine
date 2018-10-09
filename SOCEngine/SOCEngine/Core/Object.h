@@ -22,9 +22,9 @@ namespace Core
 		void AddChild(Object& child);
 		bool HasChild(const Object& child) const;
 		void DeleteChild(Object& child);
-		auto FindChildUsingIndex(uint index);
+		auto FindChildUsingIndex(uint32 index);
 
-		uint GetChildCount() const;
+		uint32 GetChildCount() const;
 		Transform& FetchTransform();
 
 		void HierarchyUse(bool parentUse);

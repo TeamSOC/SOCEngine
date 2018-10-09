@@ -20,7 +20,7 @@ Texture::Texture2D& PreIntegrateEnvBRDF::CreatePreBRDFMap(Device::DirectX& dx, S
 {
 	std::shared_ptr<ComputeShader> shader = ShaderFactory::LoadComputeShader(dx, shaderMgr, "PreIntegrateEnvBRDF", "CS", nullptr, "@PreIntegrateEnvBRDF");
 
-	const Size<uint> size(256, 256);
+	const Size<uint32> size(256, 256);
 
 	_texture.Initialize(dx, size.w, size.h,
 						DXGI_FORMAT_R16G16_FLOAT, DXGI_FORMAT_R16G16_FLOAT,

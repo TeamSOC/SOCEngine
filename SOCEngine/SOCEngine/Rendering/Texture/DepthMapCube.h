@@ -10,7 +10,7 @@ namespace Rendering
 		{
 		public:
 			DepthMapCube() = default;
-			void Initialize(Device::DirectX& dx, const Size<uint>& size, bool useSRV = false);
+			void Initialize(Device::DirectX& dx, const Size<uint32>& size, bool useSRV = false);
 			void Destroy();
 
 			void Clear(Device::DirectX& dx, float depth, unsigned char stencil);

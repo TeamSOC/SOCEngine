@@ -46,11 +46,11 @@ void LightManager::Destroy()
 	_changedLightCounts = true;
 }
 
-uint LightManager::GetPackedLightCount() const
+uint32 LightManager::GetPackedLightCount() const
 {
-	uint spotLightCount			= GetLightCount<SpotLight>()		& 0x7FF;
-	uint pointLightCount		= GetLightCount<PointLight>()		& 0x7FF;
-	uint directionalLightCount	= GetLightCount<DirectionalLight>()	& 0x3FF;
+	uint32 spotLightCount			= GetLightCount<SpotLight>()		& 0x7FF;
+	uint32 pointLightCount		= GetLightCount<PointLight>()		& 0x7FF;
+	uint32 directionalLightCount	= GetLightCount<DirectionalLight>()	& 0x3FF;
 
 	return (pointLightCount << 21) | (spotLightCount << 10) | directionalLightCount;
 }
@@ -107,12 +107,12 @@ void LightManager::CheckDirtyLights(const Core::TransformPool& transformPool)
 		auto& dirtyParamLights = lightDatas.dirtyParamLights;
 		auto& dirtyTFLights = lightDatas.dirtyTransformLights;
 
-		uint size = pool.GetSize();
-		for (uint i = 0; i < size; ++i)
+		uint32 size = pool.GetSize();
+		for (uint32 i = 0; i < size; ++i)
 		{
 			auto& light = pool.Get(i);
 
-			uint objID		= light.GetObjectID().Literal();
+			uint32 objID		= light.GetObjectID().Literal();
 			auto transform	= transformPool.Find(objID);
 			if (transform->GetDirty())
 			{

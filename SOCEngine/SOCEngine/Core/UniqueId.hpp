@@ -9,7 +9,7 @@ namespace Core
 	class UniqueID
 	{
 	public:
-		using LiteralType = uint;
+		using LiteralType = uint32;
 
 		bool operator==(const UniqueID& rhs) const
 		{
@@ -26,8 +26,8 @@ namespace Core
 	public:
 		using IndexMap		= Core::IndexMap<LiteralType>;
 		using IndexHashMap	= Core::IndexHashMap<LiteralType>;
-		friend class Core::Indexer<T, std::unordered_map<LiteralType, uint>>;
-		friend class Core::Indexer<T, std::map<LiteralType, uint>>;
+		friend class Core::Indexer<T, std::unordered_map<LiteralType, uint32>>;
+		friend class Core::Indexer<T, std::map<LiteralType, uint32>>;
 
 	protected:
 		inline LiteralType Literal() const	{ return _id; }

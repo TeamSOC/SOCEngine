@@ -36,35 +36,35 @@ void GeometryShader::UnBindShaderToContext(DirectX& dx)
 void GeometryShader::BindShaderResourceView(DirectX& dx, TextureBindIndex bind, const ShaderResourceView& srv)
 {
 	ID3D11ShaderResourceView* raw = const_cast<ShaderResourceView&>(srv).GetRaw();
-	dx.GetContext()->GSSetShaderResources(static_cast<uint>(bind), 1, &raw);
+	dx.GetContext()->GSSetShaderResources(static_cast<uint32>(bind), 1, &raw);
 }
 
 void GeometryShader::BindSamplerState(DirectX& dx, SamplerStateBindIndex bind, SamplerState state)
 {	
 	auto samplerState = const_cast<ID3D11SamplerState*>( dx.GetSamplerState(state).GetRaw() );
-	dx.GetContext()->GSSetSamplers(static_cast<uint>(bind), 1, const_cast<ID3D11SamplerState* const*>(&samplerState));
+	dx.GetContext()->GSSetSamplers(static_cast<uint32>(bind), 1, const_cast<ID3D11SamplerState* const*>(&samplerState));
 }
 
 void GeometryShader::BindConstBuffer(DirectX& dx, ConstBufferBindIndex bind, const ConstBuffer& cb)
 {
 	ID3D11Buffer* buf = const_cast<BaseBuffer&>(cb.GetBaseBuffer()).GetRaw();
-	dx.GetContext()->GSSetConstantBuffers(static_cast<uint>(bind), 1, &buf);
+	dx.GetContext()->GSSetConstantBuffers(static_cast<uint32>(bind), 1, &buf);
 }
 
 void GeometryShader::UnBindShaderResourceView(DirectX& dx, TextureBindIndex bind)
 {
 	ID3D11ShaderResourceView* srv = nullptr;
-	dx.GetContext()->GSSetShaderResources(static_cast<uint>(bind), 1, &srv);
+	dx.GetContext()->GSSetShaderResources(static_cast<uint32>(bind), 1, &srv);
 }
 
 void GeometryShader::UnBindSamplerState(DirectX& dx, SamplerStateBindIndex bind)
 {
 	ID3D11SamplerState* sampler = nullptr;
-	dx.GetContext()->GSSetSamplers(static_cast<uint>(bind), 1, &sampler);
+	dx.GetContext()->GSSetSamplers(static_cast<uint32>(bind), 1, &sampler);
 }
 
 void GeometryShader::UnBindConstBuffer(DirectX& dx, ConstBufferBindIndex bind)
 {
 	ID3D11Buffer* buf = nullptr;
-	dx.GetContext()->GSSetConstantBuffers(static_cast<uint>(bind), 1, &buf);
+	dx.GetContext()->GSSetConstantBuffers(static_cast<uint32>(bind), 1, &buf);
 }

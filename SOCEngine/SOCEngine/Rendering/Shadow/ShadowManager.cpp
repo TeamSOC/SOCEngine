@@ -64,8 +64,8 @@ void ShadowManager::CheckDirtyWithCullShadows(const Manager::CameraManager& camM
 		auto& dirtys			= shadowDatas.dirtyShadows;
 		auto& influentialLights	= shadowDatas.influentialLights;
 
-		uint size = pool.GetSize();
-		for (uint i = 0; i < size; ++i)
+		uint32 size = pool.GetSize();
+		for (uint32 i = 0; i < size; ++i)
 		{
 			auto& shadow = pool.Get(i);
 			

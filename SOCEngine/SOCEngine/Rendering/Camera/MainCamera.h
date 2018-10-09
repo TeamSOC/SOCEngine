@@ -37,7 +37,7 @@ namespace Rendering
 				Math::Matrix	prevViewProjMat;
 
 				Math::Vector3	worldPos			= Math::Vector3(0.0f, 0.0f, 0.0f);
-				uint			packedCamNearFar	= 0;
+				uint32			packedCamNearFar	= 0;
 			};
 			struct Desc
 			{				
@@ -46,14 +46,14 @@ namespace Rendering
 				float			far					= 1000.0f;
 				float			aspect				= 1.0f;
 				Color			clearColor			= Color::Clear();
-				Rect<uint>		renderRect			= Rect<uint>(0, 0, 0, 0);
+				Rect<uint32>		renderRect			= Rect<uint32>(0, 0, 0, 0);
 			};
 
 		public:
 			MainCamera(Core::ObjectID objID) : _objID(objID) {}
 			DISALLOW_ASSIGN_COPY(MainCamera);
 
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Rect<uint>& rect);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Rect<uint32>& rect);
 			void Destroy();
 
 			void UpdateCB(Device::DirectX& dx, const Core::Transform& transform);

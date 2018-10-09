@@ -20,7 +20,7 @@ void SpotLightShadowMapCBPool::InitializePreparedCB(DirectX & dx)
 	_preparedConstBuffers.clear();
 }
 
-void SpotLightShadowMapCBPool::Delete(uint shadowIndex)
+void SpotLightShadowMapCBPool::Delete(uint32 shadowIndex)
 {
 	auto iter = _constBuffers.begin() + shadowIndex;
 	_constBuffers.erase(iter);

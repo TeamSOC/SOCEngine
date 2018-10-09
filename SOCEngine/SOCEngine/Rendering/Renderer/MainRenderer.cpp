@@ -40,10 +40,10 @@ void MainRenderer::Initialize(DirectX& dx, ShaderManager& shaderMgr, BufferManag
 			}
 		}
 
-		_scaledMap.Initialize(dx, size.Cast<uint>(), DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, 0, 0);
+		_scaledMap.Initialize(dx, size.Cast<uint32>(), DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, 0, 0);
 
 		float maxLength	= static_cast<float>( std::max(renderSize.w, renderSize.h) );
-		uint mipLevel	= static_cast<uint>( log(maxLength) / log(2.0f) ) + 1;
+		uint32 mipLevel	= static_cast<uint32>( log(maxLength) / log(2.0f) ) + 1;
 		_resultMap.Initialize(dx, renderSize, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, 0, 1, mipLevel);
 		_transparentMap.Initialize(dx, renderSize, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0);
 		_skyBoxMap.Initialize(dx, renderSize, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0);
@@ -70,7 +70,7 @@ void MainRenderer::Initialize(DirectX& dx, ShaderManager& shaderMgr, BufferManag
 
 		_tbdrShader = *ShaderFactory::LoadComputeShader(dx, shaderMgr,"TBDR", "TileBasedDeferredShadingCS", &macros, "@TBDR");
 
-		Size<uint> size = Light::CullingUtility::ComputeThreadGroupSize(renderSize);
+		Size<uint32> size = Light::CullingUtility::ComputeThreadGroupSize(renderSize);
 		_tbdrThreadGroup = ComputeShader::ThreadGroup(size.w, size.h, 1);
 	}
 

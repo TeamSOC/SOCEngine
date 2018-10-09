@@ -46,7 +46,7 @@ PointLightShadow::ViewProjMatType PointLightShadow::MakeVPMatParam(const LightPo
 	Matrix proj			= Matrix::PerspectiveFovLH(1.0f, DEG_2_RAD(90.0f), radius, projNear);
 	Vector3 worldPos	= transform->GetWorldPosition();
 
-	for (uint i = 0; i < 6; ++i)
+	for (uint32 i = 0; i < 6; ++i)
 		_transposedViewProjMat[i] = Matrix::Transpose( Matrix::ComputeViewProjMatrix(worldPos, forwards[i], ups[i], proj) );
 
 	return _transposedViewProjMat;

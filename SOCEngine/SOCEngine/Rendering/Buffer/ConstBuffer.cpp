@@ -3,7 +3,7 @@
 
 using namespace Rendering::Buffer;
 
-void ConstBuffer::Initialize(Device::DirectX& dx, uint size)
+void ConstBuffer::Initialize(Device::DirectX& dx, uint32 size)
 {
 	assert(_base.GetBuffer().IsCanUse() == false);
 	_size = size;

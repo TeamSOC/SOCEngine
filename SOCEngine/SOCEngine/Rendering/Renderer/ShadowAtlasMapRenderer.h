@@ -22,10 +22,10 @@ namespace Rendering
 		public:
 			struct ResizeParam
 			{
-				uint mapResolution	= 256;
-				uint capacity		= 1;
+				uint32 mapResolution	= 256;
+				uint32 capacity		= 1;
 
-				explicit ResizeParam(uint resolution, uint _capacity)
+				explicit ResizeParam(uint32 resolution, uint32 _capacity)
 					: mapResolution(resolution), capacity(_capacity) { }
 			};
 
@@ -33,11 +33,11 @@ namespace Rendering
 			ShadowAtlasMapRenderer() = default;
 			DISALLOW_ASSIGN_COPY(ShadowAtlasMapRenderer);
 
-			void Initialize(Device::DirectX& dx, uint dlMapResolution, uint slMapResolution, uint plMapResolution);
+			void Initialize(Device::DirectX& dx, uint32 dlMapResolution, uint32 slMapResolution, uint32 plMapResolution);
 			void Destroy();
 
 			template <typename ShadowType>
-			void ReSizeShadowMap(Device::DirectX& dx, uint shadowCount)
+			void ReSizeShadowMap(Device::DirectX& dx, uint32 shadowCount)
 			{
 				ReSizeShadowMap<ShadowType>(dx, ResizeParam(GetShadowAtlasMap<ShadowType>().GetResolution(), shadowCount));
 			}
@@ -45,9 +45,9 @@ namespace Rendering
 			template <typename ShadowType>
 			void ReSizeShadowMap(Device::DirectX& dx, ResizeParam&& param)
 			{
-				auto Next2Squre = [](uint value) -> uint
+				auto Next2Squre = [](uint32 value) -> uint32
 				{
-					return 1 << (uint)(ceil(log((uint)value) / log(2.0f)));
+					return 1 << (uint32)(ceil(log((uint32)value) / log(2.0f)));
 				};
 
 				param.capacity		= Next2Squre(param.capacity);
@@ -62,12 +62,12 @@ namespace Rendering
 				{
 					GetShadowAtlasMap<ShadowType>().Destroy();
 
-					auto MakeMap = [&dx, &param](auto& depthMap, const Size<uint>& mapSize)
+					auto MakeMap = [&dx, &param](auto& depthMap, const Size<uint32>& mapSize)
 					{
 						depthMap.Initialize(dx, mapSize, param.mapResolution, param.capacity);
 					};
 
-					Size<uint> mapSize = ComputeShadowAtlasMapSize<ShadowType>(param);
+					Size<uint32> mapSize = ComputeShadowAtlasMapSize<ShadowType>(param);
 					MakeMap(GetShadowAtlasMap<ShadowType>(), mapSize);
 				}
 			}
@@ -110,9 +110,9 @@ namespace Rendering
 					ClassifyMeshes(_tempRenderQ.alphaTestRenderQ, *cullParam.meshManager.GetAlphaTestMeshPool(), light);
 
 					// 4 단계 - 그린다					
-					uint shadowIndex				= shadowMgr.GetIndexer<ShadowType>().Find(light->GetObjectID().Literal());
+					uint32 shadowIndex				= shadowMgr.GetIndexer<ShadowType>().Find(light->GetObjectID().Literal());
 					auto& shadowMap					= GetShadowAtlasMap<ShadowType>();
-					uint resolution					= shadowMap.GetResolution();
+					uint32 resolution					= shadowMap.GetResolution();
 					const auto& shadowMapVPMatCB	= shadowMgr.GetShadowMapVPMatCBPool<ShadowType>().Get(shadowIndex);
 
 					using Renderer = ShadowType::ShadowMapRenderer;
@@ -134,15 +134,15 @@ namespace Rendering
 
 		private:
 			template <typename ShadowType>
-			Size<uint> ComputeShadowAtlasMapSize(const ResizeParam& param)
+			Size<uint32> ComputeShadowAtlasMapSize(const ResizeParam& param)
 			{
-				return Size<uint>(	param.mapResolution * param.capacity,
+				return Size<uint32>(	param.mapResolution * param.capacity,
 									param.mapResolution	);
 			}
 			template <>
-			Size<uint> ComputeShadowAtlasMapSize<Shadow::PointLightShadow>(const ResizeParam& param)
+			Size<uint32> ComputeShadowAtlasMapSize<Shadow::PointLightShadow>(const ResizeParam& param)
 			{
-				return Size<uint>(	param.mapResolution * param.capacity,
+				return Size<uint32>(	param.mapResolution * param.capacity,
 									param.mapResolution * 6	);
 			}
 

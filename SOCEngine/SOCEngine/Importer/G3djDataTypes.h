@@ -85,7 +85,7 @@ namespace Importer
 		std::vector<Texture> textures;
 	};
 
-	enum class Attribute : uint //In order of buffer data
+	enum class Attribute : uint32 //In order of buffer data
 	{
 		Position	= 0,
 		Normal		= 1,

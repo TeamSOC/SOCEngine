@@ -45,7 +45,7 @@ namespace Rendering
 			return Renderer::MeshRenderer::Param(_bufferManager, _defaultShaders);
 		}
 
-		MaterialID ActivateSkyScattering(Core::Engine& engine, uint resolution, const Core::Object& directionalLightObject);
+		MaterialID ActivateSkyScattering(Core::Engine& engine, uint32 resolution, const Core::Object& directionalLightObject);
 		void DeactivateSkyScattering();
 
 		GET_CONST_ACCESSOR(UseSkyScattering,	bool,	_useSkyScattering);

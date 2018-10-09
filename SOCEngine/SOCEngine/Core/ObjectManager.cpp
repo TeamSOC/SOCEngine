@@ -16,7 +16,7 @@ Object& ObjectManager::Acquire(const std::string& name)
 
 void ObjectManager::Delete(const std::string& name)
 {
-	uint objLiteralID	= _idBookmark.Find(name);
+	uint32 objLiteralID	= _idBookmark.Find(name);
 	ObjectID id			= ObjectID(objLiteralID);
 
 	_objects.Find(id)->Destroy();

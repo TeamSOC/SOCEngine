@@ -16,7 +16,7 @@ namespace Rendering
 		public:
 			GPUUploadBuffer() = default;
 
-			void Initialize(Device::DirectX& dx, uint count, DXGI_FORMAT format, const void* dummy = nullptr)
+			void Initialize(Device::DirectX& dx, uint32 count, DXGI_FORMAT format, const void* dummy = nullptr)
 			{
 				_srBuffer.Initialize(dx, sizeof(T), count, format, dummy, 0, D3D11_USAGE_DYNAMIC);
 			}
@@ -38,14 +38,14 @@ namespace Rendering
 			inline void PushData(T& data)				{	_pool.push_back(data);			}
 			inline void PushData(T&& data)				{	_pool.push_back(data);			}
 			inline void DeleteAll()						{	_pool.clear();					}
-			inline uint GetSize() const					{	return _pool.size();			}
-			inline T& operator[](uint index)
+			inline uint32 GetSize() const					{	return _pool.size();			}
+			inline T& operator[](uint32 index)
 			{
 				assert( (0 <= index) & (index < _pool.size()));
 				return _pool[index];
 			}
 
-			inline void Delete(uint index)
+			inline void Delete(uint32 index)
 			{
 				auto iter = _pool.begin() + index;
 				_pool.erase(iter);

@@ -50,9 +50,9 @@ namespace Core
 		Map	_map;
 	};
 
-	template<typename Key, typename MarkValueType = uint>
+	template<typename Key, typename MarkValueType = uint32>
 	using BookHashMapmark = Bookmark<Key, std::unordered_map<Key, MarkValueType>>;
 
-	template<typename Key, typename MarkValueType = uint>
+	template<typename Key, typename MarkValueType = uint32>
 	using BookMapmark = Bookmark<Key, std::map<Key, MarkValueType>>;
 }

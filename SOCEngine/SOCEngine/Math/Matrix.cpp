@@ -370,7 +370,7 @@ Matrix Matrix::ComputeViewMatrix(const Matrix& worldMatrix)
 	);
 }
 
-Matrix Matrix::ComputeViewportMatrix(const Rect<uint>& rect)
+Matrix Matrix::ComputeViewportMatrix(const Rect<uint32>& rect)
 {
 	return Matrix(	float(rect.size.w) / 2.0f,			0.0f,								0.0f,	0.0f,
 					0.0f,								-float(rect.size.h) / 2.0f,			0.0f,	0.0f,
@@ -378,7 +378,7 @@ Matrix Matrix::ComputeViewportMatrix(const Rect<uint>& rect)
 					float(rect.x + rect.size.w) / 2.0f,	float(rect.y + rect.size.h) / 2.0f,	0.0f,	1.0f	);
 }
 
-Matrix Matrix::ComputeInvViewportMatrix(const Rect<uint>& rect)
+Matrix Matrix::ComputeInvViewportMatrix(const Rect<uint32>& rect)
 {
 	Matrix viewportMat = ComputeViewportMatrix(rect);
 	return Matrix::Inverse(viewportMat);

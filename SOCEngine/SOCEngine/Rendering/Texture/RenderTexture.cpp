@@ -5,7 +5,7 @@ using namespace Rendering::Texture;
 using namespace Device;
 
 RenderTexture::RenderTexture(	const DXSharedResource<ID3D11RenderTargetView>& rawRtv,
-								const DXSharedResource<ID3D11Texture2D>& rawTex2D, const Size<uint>& size)
+								const DXSharedResource<ID3D11Texture2D>& rawTex2D, const Size<uint32>& size)
 	: _renderTargetView(rawRtv), _tex2D(rawTex2D, size)
 {
 
@@ -13,11 +13,11 @@ RenderTexture::RenderTexture(	const DXSharedResource<ID3D11RenderTargetView>& ra
 
 void RenderTexture::Initialize(
 	Device::DirectX& dx,
-	const Size<uint>& size,
+	const Size<uint32>& size,
 	DXGI_FORMAT srvFormat, DXGI_FORMAT rtvFormat, DXGI_FORMAT uavFormat,
-	uint optionalBindFlags, uint sampleCount, uint mipLevel)
+	uint32 optionalBindFlags, uint32 sampleCount, uint32 mipLevel)
 {
-	const uint bindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE | ((uavFormat != DXGI_FORMAT_UNKNOWN) ? D3D11_BIND_UNORDERED_ACCESS : 0) | optionalBindFlags;
+	const uint32 bindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE | ((uavFormat != DXGI_FORMAT_UNKNOWN) ? D3D11_BIND_UNORDERED_ACCESS : 0) | optionalBindFlags;
 	
 	_tex2D.Initialize(dx, size.w, size.h, srvFormat, uavFormat, bindFlags, sampleCount, mipLevel);
 
@@ -36,7 +36,7 @@ void RenderTexture::Initialize(
 }
 
 void RenderTexture::Initialize(Device::DirectX& dx,
-	const DXSharedResource<ID3D11RenderTargetView>& rtv, const Size<uint>& size)
+	const DXSharedResource<ID3D11RenderTargetView>& rtv, const Size<uint32>& size)
 {
 	ASSERT_SUCCEEDED(rtv.IsCanUse());
 

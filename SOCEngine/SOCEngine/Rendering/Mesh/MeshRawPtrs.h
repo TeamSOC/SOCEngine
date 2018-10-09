@@ -22,7 +22,7 @@ namespace Rendering
 			void		DeleteAll()					{ _meshes.clear();									}
 			bool		Has(PtrType mesh)	const	{ Has(mesh->GetObjectID().Literal());				}
 
-			const PtrType Get(uint index) const		{ return _meshes[index]; }
+			const PtrType Get(uint32 index) const		{ return _meshes[index]; }
 			const PtrType Find(Core::ObjectID::LiteralType id) const;
 
 			void Delete(Core::ObjectID::LiteralType id);
@@ -30,7 +30,7 @@ namespace Rendering
 
 
 			bool Empty() const { return _meshes.empty(); }
-			GET_CONST_ACCESSOR(Size, uint, _meshes.size());
+			GET_CONST_ACCESSOR(Size, uint32, _meshes.size());
 
 		private:
 			std::vector<PtrType>	_meshes;

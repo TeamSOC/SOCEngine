@@ -4,7 +4,7 @@
 using namespace Rendering::Buffer;
 using namespace Device;
 
-void IndexBuffer::Initialize(Device::DirectX& dx, const std::vector<uint>& indices, BaseBuffer::Key vbKey, bool isDynamic)
+void IndexBuffer::Initialize(Device::DirectX& dx, const std::vector<uint32>& indices, BaseBuffer::Key vbKey, bool isDynamic)
 {
 	_indexCount	= indices.size();
 	_vbKey		= vbKey;

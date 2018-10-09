@@ -115,7 +115,7 @@ void EngineUtility::ActivateSkyBox(const std::string& cubeTexturePath, const std
 	_engine.GetComponentSystem().GetMainCamera().SetSkyBoxMaterialID(key);
 }
 
-void EngineUtility::ActivateSkyScattering(uint resolution, const Object& directionalLight)
+void EngineUtility::ActivateSkyScattering(uint32 resolution, const Object& directionalLight)
 {
 	MaterialID matID = _engine.GetRenderingSystem().ActivateSkyScattering(_engine, resolution, directionalLight);
 	_engine.GetComponentSystem().GetMainCamera().SetSkyBoxMaterialID(matID);

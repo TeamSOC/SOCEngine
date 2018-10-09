@@ -33,7 +33,7 @@ namespace Rendering
 			};
 
 			GET_CONST_ACCESSOR(StartCenterWorldPos, const Math::Vector3&,	_dynamicInfo.startCenterWorldPos);
-			SET_ACCESSOR_DIRTY(PackedNumfOfLights,	uint,					_dynamicInfo.packedNumfOfLights);
+			SET_ACCESSOR_DIRTY(PackedNumfOfLights,	uint32,					_dynamicInfo.packedNumfOfLights);
 
 			inline void SetStartCenterWorldPos(const Math::Vector3& pos)
 			{
@@ -50,14 +50,14 @@ namespace Rendering
 
 
 		public:
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& renderSize, const VXGIStaticInfo& info);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& renderSize, const VXGIStaticInfo& info);
 			void Destroy();
 
 			void Run(Device::DirectX& dx, const Param&& param);
 			void UpdateGIDynamicInfoCB(Device::DirectX& dx);
 			
 		private:
-			void InitializeClearVoxelMap(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, uint dimension);
+			void InitializeClearVoxelMap(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, uint32 dimension);
 			void ClearInjectColorVoxelMap(Device::DirectX& dx);
 
 		private:

@@ -5,7 +5,7 @@ using namespace Rendering;
 using namespace Rendering::Texture;
 
 void DepthMap::Initialize(Device::DirectX& dx,
-	const Size<uint>& size, bool useShaderResource, uint sampleCount)
+	const Size<uint32>& size, bool useShaderResource, uint32 sampleCount)
 {
 	unsigned int bindFlag =	D3D11_BIND_DEPTH_STENCIL | 
 							(useShaderResource ? D3D11_BIND_SHADER_RESOURCE : 0);

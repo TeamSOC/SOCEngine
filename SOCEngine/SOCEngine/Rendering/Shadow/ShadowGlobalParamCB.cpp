@@ -25,13 +25,13 @@ void ShadowGlobalParamCB::UpdateSubResource(DirectX& dx, const ShadowManager& ma
 		auto& plsBufferObj = manager.GetBuffer<PointLightShadow>();
 		auto& slsBufferObj = manager.GetBuffer<SpotLightShadow>();
 
-		auto Pack = [](uint d, uint s, uint p) -> uint
+		auto Pack = [](uint32 d, uint32 s, uint32 p) -> uint32
 		{
 			return ((p & 0x7ff) << 21) | ((s & 0x7ff) << 10) | (d & 0x3ff);
 		};
-		auto Log2Uint = [](uint i) -> uint
+		auto Log2Uint = [](uint32 i) -> uint32
 		{
-			return static_cast<uint>(log(static_cast<float>(i)) / log(2.0f));
+			return static_cast<uint32>(log(static_cast<float>(i)) / log(2.0f));
 		};
 
 		const auto& dlAtlasMap = renderer.GetShadowAtlasMap<DirectionalLightShadow>();

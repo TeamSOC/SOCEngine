@@ -50,12 +50,12 @@ namespace Rendering
 				GetBuffer<ShadowType>().PushShadow(shadow);
 				GetShadowMapVPMatCBPool<ShadowType>().PushConstBufferToQueue();
 
-				uint objLiteralID = shadow.GetObjectID().Literal();
+				uint32 objLiteralID = shadow.GetObjectID().Literal();
 				return GetPool<ShadowType>().Add(objLiteralID, shadow);
 			}
 			template <class ShadowType>	void Delete(Core::ObjectID objID)
 			{			
-				uint index = GetPool<ShadowType>().GetIndexer().Find(objID.Literal());
+				uint32 index = GetPool<ShadowType>().GetIndexer().Find(objID.Literal());
 
 				GetPool<ShadowType>().Delete(objID.Literal());
 				GetBuffer<ShadowType>().Delete(index);

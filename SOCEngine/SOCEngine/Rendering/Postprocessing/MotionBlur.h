@@ -20,7 +20,7 @@ namespace Rendering
 				float	length		= 0.0025f;
 				float	kernelSize	= 7.5f;
 				float	kernelStep	= 1.0f;
-				uint	dummy;
+				uint32	dummy;
 			};
 
 		public:

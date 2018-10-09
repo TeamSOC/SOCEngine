@@ -40,8 +40,8 @@ void MaterialManager::UpdateConstBuffer(DirectX & dx)
 		auto& pool	= materialDatas.pool;
 		auto& dirty	= materialDatas.dirty;
 
-		uint size = pool.GetSize();
-		for (uint i = 0; i<size; ++i)
+		uint32 size = pool.GetSize();
+		for (uint32 i = 0; i<size; ++i)
 		{
 			auto& material = pool.Get(i);
 			if (material.GetDirty())

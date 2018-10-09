@@ -13,14 +13,14 @@ namespace Rendering
 			ShaderResourceBuffer() = default;
 			ShaderResourceBuffer(const BaseBuffer&, const View::ShaderResourceView&);
 
-			void Initialize(Device::DirectX& dx, uint stride, uint num, DXGI_FORMAT format, const void* sysMem, uint optionalBindFlag, D3D11_USAGE usage);
+			void Initialize(Device::DirectX& dx, uint32 stride, uint32 num, DXGI_FORMAT format, const void* sysMem, uint32 optionalBindFlag, D3D11_USAGE usage);
 			void Destroy();
 
-			inline void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint size)
+			inline void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint32 size)
 			{
 				_baseBuffer.UpdateResourceUsingMapUnMap(dx, data, size);
 			}
-			inline void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint startOffset, uint size, D3D11_MAP mapType)
+			inline void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint32 startOffset, uint32 size, D3D11_MAP mapType)
 			{
 				_baseBuffer.UpdateResourceUsingMapUnMap(dx, data, startOffset, size, mapType);
 			}

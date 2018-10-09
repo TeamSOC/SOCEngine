@@ -25,7 +25,7 @@ namespace Rendering
 				float blurFar	= 22.0f;
 			};
 		public:
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& renderSize);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& renderSize);
 			void Destroy();
 
 			void Render(Device::DirectX& dx, Texture::RenderTexture& outRT, 

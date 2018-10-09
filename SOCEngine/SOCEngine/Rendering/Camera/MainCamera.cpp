@@ -18,7 +18,7 @@ using namespace Math;
 using namespace Rendering::Manager;
 using namespace Rendering::Geometry;
 
-void MainCamera::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Rect<uint>& rect)
+void MainCamera::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Rect<uint32>& rect)
 {
 	// setting desc
 	{
@@ -75,7 +75,7 @@ void MainCamera::UpdateCB(Device::DirectX & dx, const Core::Transform& dirtyTran
 
 	_camCB.UpdateSubResource(dx, _camCBData);
 
-	_camCBChangeState = TransformCB::ChangeState((static_cast<uint>(_camCBChangeState) + 1) % static_cast<uint>(TransformCB::ChangeState::MAX));
+	_camCBChangeState = TransformCB::ChangeState((static_cast<uint32>(_camCBChangeState) + 1) % static_cast<uint32>(TransformCB::ChangeState::MAX));
 	_prevViewProjMat = _viewProjMat;
 }
 

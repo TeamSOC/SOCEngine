@@ -20,10 +20,10 @@ namespace Rendering
 		{
 			struct ShadowGlobalParamCBData
 			{
-				uint packedNumOfShadowAtlasCapacity;
-				uint packedPowerOfTwoShadowResolution;
-				uint packedNumOfShadows;
-				uint dummy;
+				uint32 packedNumOfShadowAtlasCapacity;
+				uint32 packedPowerOfTwoShadowResolution;
+				uint32 packedNumOfShadows;
+				uint32 dummy;
 			};
 
 			class ShadowGlobalParamCB final 

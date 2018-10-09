@@ -20,12 +20,12 @@ namespace Rendering
 		public:
 			struct ParamCB
 			{
-				uint mainColor_alpha						= 0;
-				uint emissiveColor_Metallic					= 0;
-				uint roughness_specularity_existTextureFlag	= 0;
+				uint32 mainColor_alpha						= 0;
+				uint32 emissiveColor_Metallic					= 0;
+				uint32 roughness_specularity_existTextureFlag	= 0;
 
 				// TODO : 상위 16비트 사용하지 않는 중
-				uint iblMin_flag_ior						= 0;
+				uint32 iblMin_flag_ior						= 0;
 
 				static constexpr const char* GetKey() { return "PBRParam"; }
 			};

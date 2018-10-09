@@ -8,15 +8,15 @@ using namespace Rendering;
 using namespace Rendering::Texture;
 using namespace Rendering::View;
 
-void RenderTextureCube::Initialize(DirectX& dx, uint resolution, DXGI_FORMAT format)
+void RenderTextureCube::Initialize(DirectX& dx, uint32 resolution, DXGI_FORMAT format)
 {
-	const uint bindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
+	const uint32 bindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
 
-	auto Log2 = [](float f) -> uint
+	auto Log2 = [](float f) -> uint32
 	{
-		return static_cast<uint>(log(f) / log(2.0f));
+		return static_cast<uint32>(log(f) / log(2.0f));
 	};
-	const uint mipLevel = std::max(Log2(float(resolution + 1)), 1u);
+	const uint32 mipLevel = std::max(Log2(float(resolution + 1)), 1u);
 
 	D3D11_TEXTURE2D_DESC texDesc;
 	memset(&texDesc, 0, sizeof(D3D11_TEXTURE2D_DESC));

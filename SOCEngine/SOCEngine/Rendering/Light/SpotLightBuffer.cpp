@@ -26,7 +26,7 @@ void SpotLightBuffer::UpdateTransformBuffer(	const std::vector<SpotLight*>& dirt
 		Core::ObjectID objID = light->GetObjectID();
 		const auto& tf = tfPool.Find(objID.Literal());
 
-		uint index = indexer.Find(objID.Literal());
+		uint32 index = indexer.Find(objID.Literal());
 		_transformBuffer[index]	= light->MakeTransform(*tf);
 		_paramSRBuffer[index]	= light->MakeParam(*tf);
 	}
@@ -42,7 +42,7 @@ void SpotLightBuffer::UpdateSRBuffer(Device::DirectX& dx, bool forcedUpdate)
 	Parent::UpdateSRBuffer(dx, forcedUpdate);
 }
 
-void SpotLightBuffer::Delete(uint index)
+void SpotLightBuffer::Delete(uint32 index)
 {
 	_paramSRBuffer.Delete(index);
 	Parent::Delete(index);

@@ -37,36 +37,36 @@ void PixelShader::UnBindShaderToContext(DirectX& dx)
 void PixelShader::BindShaderResourceView(DirectX& dx, TextureBindIndex bind, const ShaderResourceView& view)
 {
 	ID3D11ShaderResourceView* srv = const_cast<ShaderResourceView&>(view).GetRaw();
-	dx.GetContext()->PSSetShaderResources(static_cast<uint>(bind), 1, &srv);
+	dx.GetContext()->PSSetShaderResources(static_cast<uint32>(bind), 1, &srv);
 }
 
 void PixelShader::BindSamplerState(DirectX& dx, SamplerStateBindIndex bind, SamplerState state)
 {
 	auto samplerState = const_cast<ID3D11SamplerState*>( dx.GetSamplerState(state).GetRaw() );
-	dx.GetContext()->PSSetSamplers(static_cast<uint>(bind), 1, const_cast<ID3D11SamplerState* const*>(&samplerState));
+	dx.GetContext()->PSSetSamplers(static_cast<uint32>(bind), 1, const_cast<ID3D11SamplerState* const*>(&samplerState));
 }
 
 void PixelShader::BindConstBuffer(DirectX& dx, ConstBufferBindIndex bind, const ConstBuffer& cb)
 {
 	ID3D11Buffer* buf = const_cast<BaseBuffer&>(cb.GetBaseBuffer()).GetRaw();
-	dx.GetContext()->PSSetConstantBuffers(static_cast<uint>(bind), 1, &buf);
+	dx.GetContext()->PSSetConstantBuffers(static_cast<uint32>(bind), 1, &buf);
 }
 
 
 void PixelShader::UnBindShaderResourceView(DirectX& dx, TextureBindIndex bind)
 {
 	ID3D11ShaderResourceView* srv = nullptr;
-	dx.GetContext()->PSSetShaderResources(static_cast<uint>(bind), 1, &srv);
+	dx.GetContext()->PSSetShaderResources(static_cast<uint32>(bind), 1, &srv);
 }
 
 void PixelShader::UnBindSamplerState(DirectX& dx, SamplerStateBindIndex bind)
 {
 	ID3D11SamplerState* sampler = nullptr;
-	dx.GetContext()->PSSetSamplers(static_cast<uint>(bind), 1, &sampler);
+	dx.GetContext()->PSSetSamplers(static_cast<uint32>(bind), 1, &sampler);
 }
 
 void PixelShader::UnBindConstBuffer(DirectX& dx, ConstBufferBindIndex bind)
 {
 	ID3D11Buffer* buf = nullptr;
-	dx.GetContext()->PSSetConstantBuffers(static_cast<uint>(bind), 1, &buf);
+	dx.GetContext()->PSSetConstantBuffers(static_cast<uint32>(bind), 1, &buf);
 }

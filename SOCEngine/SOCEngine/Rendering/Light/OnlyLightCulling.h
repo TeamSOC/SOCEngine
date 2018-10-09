@@ -16,7 +16,7 @@ namespace Rendering
 		class OnlyLightCulling final
 		{
 		public:
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& maxRenderRectSize);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& maxRenderRectSize);
 			void Destroy();
 
 			void Dispatch(Device::DirectX& dx, const Shader::ComputeShader::ThreadGroup& group);

@@ -6,11 +6,11 @@ struct GIInitParam
 {
 	struct VXGIParam
 	{
-		uint		voxelizeDimension	= 0;
+		uint32		voxelizeDimension	= 0;
 		float		voxelizeSize		= 0.0f;
 
 		VXGIParam() = default;
-		VXGIParam(uint _dimension, float _voxelizeSize) : voxelizeDimension(_dimension), voxelizeSize(_voxelizeSize) { }
+		VXGIParam(uint32 _dimension, float _voxelizeSize) : voxelizeDimension(_dimension), voxelizeSize(_voxelizeSize) { }
 	};
 
 	inline bool GetUseVXGI() const

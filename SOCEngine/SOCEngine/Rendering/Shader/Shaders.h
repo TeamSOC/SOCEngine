@@ -31,12 +31,12 @@ namespace Rendering
 		{
 		public:
 			BindShaderData() = default;
-			BindShaderData(const Resource& _resource, uint _bindIndex, bool _useVS, bool _useGS, bool _usePS, bool _useCS)
+			BindShaderData(const Resource& _resource, uint32 _bindIndex, bool _useVS, bool _useGS, bool _usePS, bool _useCS)
 				: resource(_resource), useVS(_useVS), useGS(_useGS), usePS(_usePS), useCS(_useCS) { }
 		public:
 			Resource resource;
 
-			uint bindIndex	= 0;
+			uint32 bindIndex	= 0;
 			bool useVS		= false;
 			bool useGS		= false;
 			bool usePS		= false;

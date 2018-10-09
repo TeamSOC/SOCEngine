@@ -6,14 +6,14 @@ using namespace Rendering::Buffer;
 using namespace Rendering::Shader;
 using namespace Device;
 
-void GPURawBuffer::Initialize(Device::DirectX& dx, uint stride, uint elemNum, Flag flag)
+void GPURawBuffer::Initialize(Device::DirectX& dx, uint32 stride, uint32 elemNum, Flag flag)
 {
 	bool useAll = flag == Flag::ALL_VIEW;
 	bool useSRV = (flag == Flag::ONLY_SRV) | useAll;
 	bool useUAV = (flag == Flag::ONLY_UAV) | useAll;
 	assert(useSRV | useUAV);
 
-	uint bindFlag = (useSRV ? D3D11_BIND_SHADER_RESOURCE : 0) | (useUAV ? D3D11_BIND_UNORDERED_ACCESS : 0);
+	uint32 bindFlag = (useSRV ? D3D11_BIND_SHADER_RESOURCE : 0) | (useUAV ? D3D11_BIND_UNORDERED_ACCESS : 0);
 
 	D3D11_BUFFER_DESC desc;
 	memset(&desc, 0, sizeof(D3D11_BUFFER_DESC));

@@ -34,13 +34,13 @@ namespace Rendering
 			template <class Iterator>
 			void Iterate(Iterator iterator)
 			{
-				uint vbKeyCount = _pool.GetSize();
-				for (uint i = 0; i < vbKeyCount; ++i)
+				uint32 vbKeyCount = _pool.GetSize();
+				for (uint32 i = 0; i < vbKeyCount; ++i)
 				{
 					auto& rawPool = _pool.Get(i);
 
-					uint meshCount = rawPool.GetSize();
-					for (uint meshIdx = 0; meshIdx < meshCount; ++meshIdx)
+					uint32 meshCount = rawPool.GetSize();
+					for (uint32 meshIdx = 0; meshIdx < meshCount; ++meshIdx)
 						iterator(rawPool.Get(meshIdx));
 				}
 			}

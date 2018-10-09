@@ -158,7 +158,7 @@ bool Transform::HasChild(ObjectID id) const
 
 void Transform::DeleteChild(ObjectID id)
 {
-	uint pos = 0;
+	uint32 pos = 0;
 	for (pos; pos < _childIDs.size() && _childIDs[pos] != id; ++pos);
 
 	assert(pos == _childIDs.size());

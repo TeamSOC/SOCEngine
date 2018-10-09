@@ -10,10 +10,10 @@ void UnorderedAccessView::Destroy()
 
 void UnorderedAccessView::Initialize(
 	Device::DirectX& dx,
-	DXGI_FORMAT format, uint numElements, ID3D11Resource* resource,
+	DXGI_FORMAT format, uint32 numElements, ID3D11Resource* resource,
 	D3D11_UAV_DIMENSION viewDimension,
-	uint tex3dMipSlice, uint tex3dWSize,
-	uint bufferFlags)
+	uint32 tex3dMipSlice, uint32 tex3dWSize,
+	uint32 bufferFlags)
 {
 	assert(_uav.GetRaw() == nullptr);
 

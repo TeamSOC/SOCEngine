@@ -45,7 +45,7 @@ void InjectRadianceFormUtility::UnBind(Device::DirectX & dx)
 	ComputeShader::UnBindUnorderedAccessView(dx, UAVBindIndex(3));
 }
 
-uint InjectRadianceFormUtility::CalcThreadSideLength(uint dimension)
+uint32 InjectRadianceFormUtility::CalcThreadSideLength(uint32 dimension)
 {
 	return (dimension + INJECTION_TILE_RES - 1) / INJECTION_TILE_RES;
 }

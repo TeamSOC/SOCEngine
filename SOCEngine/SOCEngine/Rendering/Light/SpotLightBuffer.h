@@ -23,7 +23,7 @@ namespace Rendering
 											const Core::ObjectID::IndexHashMap& indexer );
 				void UpdateSRBuffer(Device::DirectX& dx, bool forcedUpdate);
 
-				void Delete(uint index);
+				void Delete(uint32 index);
 				void DeleteAll();
 
 				GET_CONST_ACCESSOR_REF(ParamSRBuffer, _paramSRBuffer.GetShaderResourceBuffer());

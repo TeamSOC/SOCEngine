@@ -9,22 +9,22 @@ namespace Core
 	class UniqueIDManager 
 	{
 	public:
-		constexpr static const uint BitSize = sizeof(uint) * 8;
+		constexpr static const uint32 BitSize = sizeof(uint32) * 8;
 
 		UniqueIDManager() = default;
 
 	public:
-		uint Acquire()
+		uint32 Acquire()
 		{
-			uint bitFieldIdx = 0;
-			uint allSet = -1;
+			uint32 bitFieldIdx = 0;
+			uint32 allSet = -1;
 			for (; bitFieldIdx < _bitFields.size(); ++bitFieldIdx)
 			{
 				auto& bitField = _bitFields[bitFieldIdx];
 				if (bitField == allSet)
 					continue;
 
-				uint pos = 0;
+				uint32 pos = 0;
 				while (pos < BitSize && (bitField & (1 << pos++)));
 
 				if (--pos != BitSize)
@@ -38,17 +38,17 @@ namespace Core
 			return bitFieldIdx * BitSize;
 		}
 
-		bool Has(uint id) const
+		bool Has(uint32 id) const
 		{
-			uint pos = id / BitSize;
+			uint32 pos = id / BitSize;
 			return (pos >= _bitFields.size()) ? false : (_bitFields[pos] & (1 << (id % BitSize))) != 0;
 		}
 
-		void Delete(uint id)
+		void Delete(uint32 id)
 		{
 			if ( Has(id) )
 			{
-				uint& bits = _bitFields[id / BitSize];
+				uint32& bits = _bitFields[id / BitSize];
 				bits &= ~(1 << (id % BitSize));
 			}
 		}
@@ -62,7 +62,7 @@ namespace Core
 		DISALLOW_COPY_CONSTRUCTOR(UniqueIDManager);
 
 	private:
-		std::vector<uint> _bitFields;
+		std::vector<uint32> _bitFields;
 	};
 
 	template <typename IDType>
@@ -71,7 +71,7 @@ namespace Core
 	public:
 		IDType Acquire()
 		{
-			uint literalID = UniqueIDManager::Acquire();
+			uint32 literalID = UniqueIDManager::Acquire();
 			return IDType(literalID);
 		}
 

@@ -33,25 +33,25 @@ namespace Rendering
 			friend class RenderingSystem;
 
 		public:
-			bool			Has(uint key) const;
-			const Shaders&	Find(uint key) const;
-			const Shaders&	Find(uint bufferFlag, DefaultRenderType renderType) const;
+			bool			Has(uint32 key) const;
+			const Shaders&	Find(uint32 key) const;
+			const Shaders&	Find(uint32 bufferFlag, DefaultRenderType renderType) const;
 
-			static uint MakeKey(uint bufferFlag, DefaultRenderType renderType);
-			std::string MakeDefaultSahderFileName(DefaultRenderType renderType, uint bufferFlag) const;
+			static uint32 MakeKey(uint32 bufferFlag, DefaultRenderType renderType);
+			std::string MakeDefaultSahderFileName(DefaultRenderType renderType, uint32 bufferFlag) const;
 
 		private:
 			void Initialize(Device::DirectX& dx, ShaderManager& shaderMgr);
-			const Shaders& Add(uint key, const Shader::ShaderGroup& shaders);
+			const Shaders& Add(uint32 key, const Shader::ShaderGroup& shaders);
 			void Destroy();
 
 			const Shaders& LoadDefaultSahder(	Device::DirectX& dx, ShaderManager& shaderMgr,
-												DefaultRenderType renderType, uint bufferFlag, 
+												DefaultRenderType renderType, uint32 bufferFlag, 
 												const std::vector<Shader::ShaderMacro>* macros);
 			void MakeDefaultShaderMainFuncNames(std::string& outVSMain, std::string& outGSMain, std::string& outPSMain, DefaultRenderType renderType);
 
 		private:
-			std::unordered_map<uint, Shaders> _shaders; 
+			std::unordered_map<uint32, Shaders> _shaders; 
 		};
 	}
 }

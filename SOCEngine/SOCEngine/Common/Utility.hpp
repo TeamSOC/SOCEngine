@@ -70,7 +70,7 @@ namespace Utility
 			return ParseNameAndFormat( &path.c_str()[fileNameStartPos+1] );
 		}
 
-		static uint MakeKey(const std::vector<std::string>& keys)
+		static uint32 MakeKey(const std::vector<std::string>& keys)
 		{
 			std::string result = "";
 			for (auto& iter : keys)
@@ -89,7 +89,7 @@ namespace Utility
 		struct CheckBit
 		{
 			constexpr static unsigned int value =
-				CheckBit<uint(((1 << n) & CheckValue) == 0) * n - 1, n>::value;
+				CheckBit<uint32(((1 << n) & CheckValue) == 0) * n - 1, n>::value;
 		};
 
 		template <int pn>

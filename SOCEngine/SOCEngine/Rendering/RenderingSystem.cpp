@@ -93,18 +93,18 @@ void RenderingSystem::Destroy(Engine& engine)
 	_tex2dManager.DeleteAll();
 }
 
-MaterialID RenderingSystem::ActivateSkyScattering(Engine& engine, uint resolution, const Object& directionalLightObject)
+MaterialID RenderingSystem::ActivateSkyScattering(Engine& engine, uint32 resolution, const Object& directionalLightObject)
 {
 	assert(_useSkyScattering == false);
 	_useSkyScattering = true;
 
-	Size<uint> viewport = engine.GetDirectX().GetBackBufferRect().size.Cast<uint>();
-	uint minSize = std::min(viewport.w, viewport.h);
-	auto Log2Uint = [](uint i) -> uint
+	Size<uint32> viewport = engine.GetDirectX().GetBackBufferRect().size.Cast<uint32>();
+	uint32 minSize = std::min(viewport.w, viewport.h);
+	auto Log2Uint = [](uint32 i) -> uint32
 	{
-		return static_cast<uint>(log(static_cast<float>(i)) / log(2.0f));
+		return static_cast<uint32>(log(static_cast<float>(i)) / log(2.0f));
 	};
-	resolution = std::min(static_cast<uint>(1 << Log2Uint(minSize)), resolution);
+	resolution = std::min(static_cast<uint32>(1 << Log2Uint(minSize)), resolution);
 
 	_skyScatteringRenderer.Initialize(engine.GetDirectX(), _bufferManager, _shaderManager, _materialManager, resolution);
 	

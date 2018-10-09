@@ -15,7 +15,7 @@ void OpaqueMeshRenderQueue::Add(OpaqueMeshRenderQueue::MeshRenderQType& mesh)
 
 void OpaqueMeshRenderQueue::DeleteAllContent()
 {
-	uint vbKeyCount = _vbPerMeshes.GetSize();
-	for (uint i = 0; i < vbKeyCount; ++i)
+	uint32 vbKeyCount = _vbPerMeshes.GetSize();
+	for (uint32 i = 0; i < vbKeyCount; ++i)
 		_vbPerMeshes.Get(i).DeleteAll();
 }

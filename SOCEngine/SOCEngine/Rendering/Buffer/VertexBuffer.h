@@ -15,11 +15,11 @@ namespace Rendering
 			struct Desc
 			{
 				Desc() = default;
-				Desc(uint _stride, uint _vertexCount)
+				Desc(uint32 _stride, uint32 _vertexCount)
 					: stride(_stride), vertexCount(_vertexCount) { }
 
-				uint			stride		= 0;
-				uint			vertexCount	= 0;
+				uint32			stride		= 0;
+				uint32			vertexCount	= 0;
 			};
 
 			VertexBuffer() = default;
@@ -27,10 +27,10 @@ namespace Rendering
 			void Initialize(Device::DirectX& dx, const Desc& desc, const void* sysMem, bool isDynamic, const std::vector<Shader::VertexShader::SemanticInfo>& semanticInfos);
 			void Destroy();
 
-			void IASetBuffer(Device::DirectX& dx, uint offset = 0) const;
-			void UpdateVertexData(Device::DirectX& dx, const void* data, uint size);
+			void IASetBuffer(Device::DirectX& dx, uint32 offset = 0) const;
+			void UpdateVertexData(Device::DirectX& dx, const void* data, uint32 size);
 
-			GET_CONST_ACCESSOR(VertexCount,	uint,			_desc.vertexCount);
+			GET_CONST_ACCESSOR(VertexCount,	uint32,			_desc.vertexCount);
 			GET_CONST_ACCESSOR(Semantics,	const auto&,	_semantics);
 
 		private:

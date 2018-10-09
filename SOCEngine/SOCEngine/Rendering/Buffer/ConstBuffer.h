@@ -12,17 +12,17 @@ namespace Rendering
 		{
 		public:
 			ConstBuffer() = default;
-			ConstBuffer(Device::DirectX& dx, uint size) { Initialize(dx, size); }
+			ConstBuffer(Device::DirectX& dx, uint32 size) { Initialize(dx, size); }
 
 			GET_CONST_ACCESSOR_REF(BaseBuffer, _base);
 
-			void Initialize(Device::DirectX& dx, uint size);
+			void Initialize(Device::DirectX& dx, uint32 size);
 			void UpdateSubResource(Device::DirectX& dx, const void* data);
 			void Destroy();
 
 		private:
 			BaseBuffer			_base;
-			uint				_size = 0;
+			uint32				_size = 0;
 		};
 
 		template <typename Type>

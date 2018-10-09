@@ -7,15 +7,15 @@
 
 namespace Core
 {
-	template<typename T, uint size>
+	template<typename T, uint32 size>
 	class ArrayVector
 	{
 	private:
 		std::array<std::vector<T>, size> _vectorArray;
 
 	public:
-		template<uint level>
-		uint PushBack(const T& object)
+		template<uint32 level>
+		uint32 PushBack(const T& object)
 		{
 			static_assert(level < size, "Error, Out of Range!");
 
@@ -24,8 +24,8 @@ namespace Core
 			return vector.size() - 1;
 		}
 
-		template<uint level>
-		void Insert(const T& object, uint index)
+		template<uint32 level>
+		void Insert(const T& object, uint32 index)
 		{
 			static_assert(level < size, "Error, Out of Range!");
 
@@ -33,8 +33,8 @@ namespace Core
 			vector.insert(vector.begin() + index, object);
 		}
 
-		template<uint fromLevel, uint toLevel>
-		void Copy(uint fromIndex)
+		template<uint32 fromLevel, uint32 toLevel>
+		void Copy(uint32 fromIndex)
 		{
 			static_assert(fromLevel < size, "Error, Out of Range!");
 			static_assert(toLevel < size, "Error, Out of Range!");
@@ -45,8 +45,8 @@ namespace Core
 			toVector.push_back(fromVector[fromIndex]);
 		}
 
-		template<uint fromLevel, uint toLevel>
-		void Copy(uint fromIndex, uint toIndex)
+		template<uint32 fromLevel, uint32 toLevel>
+		void Copy(uint32 fromIndex, uint32 toIndex)
 		{
 			static_assert(fromLevel < size, "Error, Out of Range!");
 			static_assert(toLevel < size, "Error, Out of Range!");
@@ -57,22 +57,22 @@ namespace Core
 			toVector.insert(toVector.begin() + toIndex, fromVector[fromIndex]);
 		}
 
-		template<uint fromLevel, uint toLevel>
-		void Move(uint fromIndex)
+		template<uint32 fromLevel, uint32 toLevel>
+		void Move(uint32 fromIndex)
 		{
 			Copy<fromLevel, toLevel>(fromIndex);
 			Delete<fromLevel>(fromIndex);
 		}
 
-		template<uint fromLevel, uint toLevel>
-		void Move(uint fromIndex, uint toIndex)
+		template<uint32 fromLevel, uint32 toLevel>
+		void Move(uint32 fromIndex, uint32 toIndex)
 		{
 			Copy<fromLevel, toLevel>(fromIndex, toIndex);
 			Delete<fromLevel>(fromIndex);
 		}
 
-		template<uint level>
-		void Delete(uint index)
+		template<uint32 level>
+		void Delete(uint32 index)
 		{
 			static_assert(level < size, "Error, Out of Range!");
 
@@ -80,33 +80,33 @@ namespace Core
 			vector.erase(vector.begin() + index);
 		}
 
-		template<uint level>
+		template<uint32 level>
 		void DeleteAll()
 		{
 			static_assert(level < size, "Error, Out of Range!");
 			_vectorArray[level].clear();
 		}
 
-		template<uint level>
-		const T& Get(uint index) const
+		template<uint32 level>
+		const T& Get(uint32 index) const
 		{
 			static_assert(level < size, "Error, Out of Range!");
 			return _vectorArray[level][index];
 		}
 
-		template<uint level>
-		T& Get(uint index)
+		template<uint32 level>
+		T& Get(uint32 index)
 		{
 			return const_cast<T&>(static_cast<const ArrayVector<T, size>*>(this)->Get<level>(index));
 		}
 
-		template<uint level>
+		template<uint32 level>
 		size_t GetSize() const
 		{
 			static_assert(level < size, "Error, Out of Range!");
 			return _vectorArray[level].size();
 		}
 
-		static constexpr uint GetMaxLelvel() { return size; }
+		static constexpr uint32 GetMaxLelvel() { return size; }
 	};
 }

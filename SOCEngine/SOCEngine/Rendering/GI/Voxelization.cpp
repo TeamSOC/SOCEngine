@@ -24,12 +24,12 @@ using namespace Rendering::RenderState;
 using namespace Rendering::Geometry;
 using namespace Rendering::Material;
 
-void Voxelization::Initialize(DirectX& dx, ShaderManager& shaderMgr, uint dimension, float voxelSize)
+void Voxelization::Initialize(DirectX& dx, ShaderManager& shaderMgr, uint32 dimension, float voxelSize)
 {
 	_dimension = static_cast<float>(dimension);
 	_worldSize = _dimension * voxelSize;
 
-	uint count = dimension * dimension * dimension;
+	uint32 count = dimension * dimension * dimension;
 	
 	_voxelAlbedoRawBuffer.Initialize(dx,	4, count, GPURawBuffer::Flag::ALL_VIEW);
 	_voxelEmissionRawBuffer.Initialize(dx,	4, count, GPURawBuffer::Flag::ALL_VIEW);
@@ -61,12 +61,12 @@ void Voxelization::ClearVoxelMap(DirectX& dx, const ExplicitConstBuffer<VXGIStat
 	ComputeShader::BindConstBuffer(dx, ConstBufferBindIndex::VXGIStaticInfoCB, vxgiStaticInfoCB);
 
 
-	auto ComputeThreadGroupSideLength = [](uint sideLength)
+	auto ComputeThreadGroupSideLength = [](uint32 sideLength)
 	{
-		return static_cast<uint>(static_cast<float>(sideLength + 8 - 1) / 8.0f);
+		return static_cast<uint32>(static_cast<float>(sideLength + 8 - 1) / 8.0f);
 	};
 
-	uint length = ComputeThreadGroupSideLength(static_cast<uint>(_dimension));
+	uint32 length = ComputeThreadGroupSideLength(static_cast<uint32>(_dimension));
 	_clearVoxelRawMapCS.Dispatch(dx, ComputeShader::ThreadGroup(length, length, length));
 
 	ComputeShader::UnBindConstBuffer(dx, ConstBufferBindIndex::VXGIStaticInfoCB);

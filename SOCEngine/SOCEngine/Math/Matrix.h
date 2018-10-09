@@ -52,8 +52,8 @@ namespace Math
 		static Matrix OrthoLH(float w, float h, float zn, float zf);
 		static Matrix RotateUsingAxis(const Vector3& v, float angle);
 		static Matrix ComputeViewMatrix(const Matrix &worldMatrix);
-		static Matrix ComputeViewportMatrix(const Rect<uint>& rect);
-		static Matrix ComputeInvViewportMatrix(const Rect<uint>& rect);
+		static Matrix ComputeViewportMatrix(const Rect<uint32>& rect);
+		static Matrix ComputeInvViewportMatrix(const Rect<uint32>& rect);
 		static Matrix MakeRotationMatrix(const Vector3& right, const Vector3& up, const Vector3& forward);
 		static Matrix LookAtDir(const Vector3 & targetDir, const Vector3* upVec = nullptr);
 		static Matrix ComputeViewProjMatrix(const Vector3& eyePos, const Vector3& forward, const Vector3& up, const Matrix& projMat);

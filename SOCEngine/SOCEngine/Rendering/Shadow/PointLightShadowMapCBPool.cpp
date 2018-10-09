@@ -16,7 +16,7 @@ void PointLightShadowMapCBPool::InitializePreparedCB(DirectX& dx)
 
 	for (auto& iter : _preparedConstBuffers)
 	{
-		for (uint i = 0; i < 6; ++i)
+		for (uint32 i = 0; i < 6; ++i)
 			iter[i].Initialize(dx);
 	}
 
@@ -24,7 +24,7 @@ void PointLightShadowMapCBPool::InitializePreparedCB(DirectX& dx)
 	_preparedConstBuffers.clear();
 }
 
-void PointLightShadowMapCBPool::Delete(uint index)
+void PointLightShadowMapCBPool::Delete(uint32 index)
 {
 	auto iter = _constBuffers.begin() + index;
 	_constBuffers.erase(iter);
@@ -41,9 +41,9 @@ void PointLightShadowMapCBPool::UpdateSubResource(DirectX& dx, const std::vector
 	for (auto shadow : dirtyShadows)
 	{
 		Core::ObjectID objID = shadow->GetObjectID();
-		uint index = indexer.Find(objID.Literal());
+		uint32 index = indexer.Find(objID.Literal());
 
-		for (uint i = 0; i < 6; ++i)
+		for (uint32 i = 0; i < 6; ++i)
 			_constBuffers[index][i].UpdateSubResource(dx, shadow->GetTransposedVPMat()[i]);
 	}
 }

@@ -21,7 +21,7 @@ namespace Rendering
 
 			static void Bind(Device::DirectX& dx, VoxelMap& outVoxelMap, const BindParam& param);
 			static void UnBind(Device::DirectX& dx);
-			static uint CalcThreadSideLength(uint dimension);
+			static uint32 CalcThreadSideLength(uint32 dimension);
 		};
 	}
 }

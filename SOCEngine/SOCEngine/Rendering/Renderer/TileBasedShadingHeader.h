@@ -20,9 +20,9 @@ namespace Rendering
 
 			struct Packed
 			{
-				uint		packedViewportSize		= 0;
-				uint 		packedNumOfLights		= 0;
-				uint 		maxNumOfperLightInTile	= 0;
+				uint32		packedViewportSize		= 0;
+				uint32 		packedNumOfLights		= 0;
+				uint32 		maxNumOfperLightInTile	= 0;
 			};
 
 			Packed			packedParam;

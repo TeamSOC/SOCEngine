@@ -5,20 +5,20 @@
 using namespace Rendering::Texture;
 using namespace Rendering::View;
 
-Texture2D::Texture2D(const ShaderResourceView& srv, const DXSharedResource<ID3D11Texture2D>& tex, bool hasAlpha, const Size<uint>& size)
+Texture2D::Texture2D(const ShaderResourceView& srv, const DXSharedResource<ID3D11Texture2D>& tex, bool hasAlpha, const Size<uint32>& size)
 	: _srv(srv), _texture(tex), _size(size)
 {
 }
 
-Texture2D::Texture2D(const DXSharedResource<ID3D11Texture2D>& tex, const Size<uint>& size)
+Texture2D::Texture2D(const DXSharedResource<ID3D11Texture2D>& tex, const Size<uint32>& size)
 	: _texture(tex), _size(size)
 {
 }
 
 void Texture2D::Initialize(Device::DirectX& dx,
-	uint width, uint height,
+	uint32 width, uint32 height,
 	DXGI_FORMAT srvFormat, DXGI_FORMAT uavFormat,
-	uint bindFlags, uint sampleCount, uint mipLevels)
+	uint32 bindFlags, uint32 sampleCount, uint32 mipLevels)
 {
 	_size.w = width;
 	_size.h = height;
@@ -112,10 +112,10 @@ void Texture2D::Destroy()
 	_texture.Destroy();
 	_srv.Destroy();
 	_uav.Destroy();
-	_size = Size<uint>(0, 0);
+	_size = Size<uint32>(0, 0);
 }
 
-const Size<uint>& Texture2D::FetchSize()
+const Size<uint32>& Texture2D::FetchSize()
 {
 	if( (_size.w != 0) & (_size.h != 0) )
 		return _size;

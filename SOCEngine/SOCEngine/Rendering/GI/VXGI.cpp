@@ -17,30 +17,30 @@ using namespace Rendering::Shader;
 using namespace Rendering::Factory;
 using namespace Rendering::Renderer;
 
-void VXGI::InitializeClearVoxelMap(DirectX& dx, ShaderManager& shaderMgr, uint dimension)
+void VXGI::InitializeClearVoxelMap(DirectX& dx, ShaderManager& shaderMgr, uint32 dimension)
 {
 	_clearVoxelMap = *ShaderFactory::LoadComputeShader(dx, shaderMgr, "ClearVoxelMap", "CS", nullptr, "@ClearVoxelMap");
 }
 
 void VXGI::ClearInjectColorVoxelMap(DirectX& dx)
 {
-	auto Clear = [&dx, &shader = _clearVoxelMap](UnorderedAccessView& uav, uint sideLength, bool isAnisotropic)
+	auto Clear = [&dx, &shader = _clearVoxelMap](UnorderedAccessView& uav, uint32 sideLength, bool isAnisotropic)
 	{
-		auto ComputeThreadGroupSideLength = [](uint sideLength)
+		auto ComputeThreadGroupSideLength = [](uint32 sideLength)
 		{
-			return static_cast<uint>( static_cast<float>(sideLength + 8 - 1) / 8.0f );
+			return static_cast<uint32>( static_cast<float>(sideLength + 8 - 1) / 8.0f );
 		};
 		
 		AutoBinderUAV outUAV(dx, UAVBindIndex(0), uav);
-		uint yz = ComputeThreadGroupSideLength(sideLength);
-		shader.Dispatch(dx, ComputeShader::ThreadGroup(ComputeThreadGroupSideLength(sideLength * (isAnisotropic ? (uint)VoxelMap::Direction::Num : 1)), yz, yz));
+		uint32 yz = ComputeThreadGroupSideLength(sideLength);
+		shader.Dispatch(dx, ComputeShader::ThreadGroup(ComputeThreadGroupSideLength(sideLength * (isAnisotropic ? (uint32)VoxelMap::Direction::Num : 1)), yz, yz));
 	};
 
 	Clear(*_injectionSourceMap.GetSourceMapUAV(), _staticInfo.dimension, false);
 	Clear(*_mipmappedInjectionMap.GetSourceMapUAV(), _staticInfo.dimension / 2, true);
 }
 
-void VXGI::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint>& renderSize, const VXGIStaticInfo& info)
+void VXGI::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint32>& renderSize, const VXGIStaticInfo& info)
 {
 	// Setting Infos
 	{
@@ -58,7 +58,7 @@ void VXGI::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint>& r
 	// Injection
 	{
 		_injectionSourceMap.Initialize(dx, _staticInfo.dimension, DXGI_FORMAT_R8G8B8A8_TYPELESS, DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_FORMAT_R32_UINT, 1, false);
-		_mipmappedInjectionMap.Initialize(dx, _staticInfo.dimension / 2, DXGI_FORMAT_R8G8B8A8_TYPELESS, DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_FORMAT_R32_UINT, uint(_staticInfo.maxMipLevel) - 1, true);
+		_mipmappedInjectionMap.Initialize(dx, _staticInfo.dimension / 2, DXGI_FORMAT_R8G8B8A8_TYPELESS, DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_FORMAT_R32_UINT, uint32(_staticInfo.maxMipLevel) - 1, true);
 
 		_injectPointLight.Initialize(dx, shaderMgr, _staticInfo.dimension);
 		_injectSpotLight.Initialize(dx, shaderMgr, _staticInfo.dimension);

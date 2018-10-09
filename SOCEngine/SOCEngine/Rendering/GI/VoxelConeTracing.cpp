@@ -21,7 +21,7 @@ using namespace Rendering::Factory;
 using namespace Rendering::Camera;
 using namespace Rendering::RenderState;
 
-void VoxelConeTracing::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint>& renderSize)
+void VoxelConeTracing::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint32>& renderSize)
 {
 	std::vector<ShaderMacro> macro{dx.GetMSAAShaderMacro()};
 	_shader = *ShaderFactory::LoadComputeShader(dx, shaderMgr, "VoxelConeTracing", "VoxelConeTracingCS", &macro, "@VCT");

@@ -9,7 +9,7 @@ using namespace Rendering::Texture;
 using namespace Rendering::RenderState;
 using namespace Rendering::PostProcessing;
 
-void MainSceneMaker::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint>& renderSize)
+void MainSceneMaker::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint32>& renderSize)
 {
 	std::vector<ShaderMacro> macros{ dx.GetMSAAShaderMacro() };
 

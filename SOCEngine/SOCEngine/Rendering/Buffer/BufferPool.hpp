@@ -21,25 +21,25 @@ namespace Rendering
 			BufferPool() = default;
 			DISALLOW_ASSIGN_COPY(BufferPool);
 
-			void Add(uint hashKey, const BufferType& bufferData)
+			void Add(uint32 hashKey, const BufferType& bufferData)
 			{
 				_buffers.Add(hashKey, bufferData);
 			}
 
-			BufferType* Find(uint hashKey)
+			BufferType* Find(uint32 hashKey)
 			{
 				return _buffers.Find(hashKey);
 			}
-			const BufferType* Find(uint hashKey) const
+			const BufferType* Find(uint32 hashKey) const
 			{
 				return _buffers.Find(hashKey);
 			}
 
-			bool Has(uint hashKey) const
+			bool Has(uint32 hashKey) const
 			{
 				return _buffers.Has(hashKey);
 			}
-			void Delete(uint hashKey)
+			void Delete(uint32 hashKey)
 			{
 				auto vb = _buffers.Find(hashKey);
 				if (vb == nullptr) return;
@@ -53,7 +53,7 @@ namespace Rendering
 			}
 
 		private:
-			Core::VectorMap<uint, BufferType>	_buffers;
+			Core::VectorMap<uint32, BufferType>	_buffers;
 		};
 
 		using VBPool = BufferPool<Buffer::VertexBuffer>;

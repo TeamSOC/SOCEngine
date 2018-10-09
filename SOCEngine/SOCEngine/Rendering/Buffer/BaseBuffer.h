@@ -15,7 +15,7 @@ namespace Rendering
 		class BaseBuffer
 		{
 		public:
-			using Key = uint;
+			using Key = uint32;
 
 		public:
 			BaseBuffer() = default;
@@ -29,8 +29,8 @@ namespace Rendering
 			GET_ACCESSOR(Raw,			ID3D11Buffer* const,						_buffer.GetRaw());
 
 			void UpdateSubResource(Device::DirectX& dx, const void* data);
-			void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint size);
-			void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint startOffset, uint size, D3D11_MAP mapType);
+			void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint32 size);
+			void UpdateResourceUsingMapUnMap(Device::DirectX& dx, const void* data, uint32 startOffset, uint32 size, D3D11_MAP mapType);
 
 		private:
 			DXSharedResource<ID3D11Buffer> _buffer;

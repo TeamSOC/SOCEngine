@@ -12,7 +12,7 @@ namespace Rendering
 			DepthMap() = default;
 
 			// if SampleCount = 0, sampleCount = msaa.count
-			void Initialize(Device::DirectX& dx, const Size<uint>& size, bool useShaderResource, uint sampleCount = 0);
+			void Initialize(Device::DirectX& dx, const Size<uint32>& size, bool useShaderResource, uint32 sampleCount = 0);
 			void Destroy();
 
 			void Clear(Device::DirectX& dx, float depth, unsigned char stencil);

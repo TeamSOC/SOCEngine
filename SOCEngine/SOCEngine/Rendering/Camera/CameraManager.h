@@ -53,7 +53,7 @@ namespace Rendering
 			template <class CameraType> void Delete(Core::ObjectID objID)
 			{
 				auto& pool = GetPool<CameraType>();
-				uint index = pool.GetIndexer().Find(objID.Literal());
+				uint32 index = pool.GetIndexer().Find(objID.Literal());
 
 				pool.Delete(objID.Literal());
 				GetCameraDatas<CameraType>().mustUpdateToGPU = true;

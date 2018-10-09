@@ -59,21 +59,21 @@ namespace Device
 		void SetViewport(const Rect<float>& rect);
 		void RestoreViewportToBackBuffer();
 
-		void SetRenderTargets(const uint numRTs, Rendering::Texture::RenderTexture* const*, ID3D11DepthStencilView* dsv = nullptr);
-		void SetRenderTargets(const uint numRTs, Rendering::Texture::RenderTexture* const*, Rendering::Texture::DepthMap&);
+		void SetRenderTargets(const uint32 numRTs, Rendering::Texture::RenderTexture* const*, ID3D11DepthStencilView* dsv = nullptr);
+		void SetRenderTargets(const uint32 numRTs, Rendering::Texture::RenderTexture* const*, Rendering::Texture::DepthMap&);
 		void SetRenderTarget(Rendering::Texture::RenderTexture& target, ID3D11DepthStencilView* dsv = nullptr);
 		void SetRenderTarget(Rendering::Texture::RenderTexture& target, Rendering::Texture::DepthMap& targetDepthMap);
 		void SetRenderTarget(Rendering::Texture::RenderTextureCube& target, ID3D11DepthStencilView* dsv = nullptr);
 		void SetRenderTarget(Rendering::Texture::RenderTextureCube& target, Rendering::Texture::DepthMapCube& targetDepthMap);
-		void ReSetRenderTargets(const uint numRTs);
-		void SetUAVsWithoutRenderTarget(uint uavStartSlot, const uint numUAVs, Rendering::View::UnorderedAccessView* const*);
-		void ReSetUAVsWithoutRenderTarget(const uint uavStartSlot, const uint numUAVs);
+		void ReSetRenderTargets(const uint32 numRTs);
+		void SetUAVsWithoutRenderTarget(uint32 uavStartSlot, const uint32 numUAVs, Rendering::View::UnorderedAccessView* const*);
+		void ReSetUAVsWithoutRenderTarget(const uint32 uavStartSlot, const uint32 numUAVs);
 		void SetDepthMapWithoutRenderTarget(Rendering::Texture::DepthMap&);
 			 
-		void SetBlendState(Rendering::RenderState::BlendState state, const float blendFactor[4], uint sampleMask);
+		void SetBlendState(Rendering::RenderState::BlendState state, const float blendFactor[4], uint32 sampleMask);
 		void SetBlendState(Rendering::RenderState::BlendState state);
 			 
-		void SetDepthStencilState(Rendering::RenderState::DepthState state, uint stencilRef);
+		void SetDepthStencilState(Rendering::RenderState::DepthState state, uint32 stencilRef);
 		void SetRasterizerState(Rendering::RenderState::RasterizerState state);
 		void SetPrimitiveTopology(Rendering::RenderState::PrimitiveTopology);
 
@@ -92,7 +92,7 @@ namespace Device
 		GET_CONST_ACCESSOR(BackBufferRect,	const auto&,					_backBufferRect);
 
 		const Rendering::Shader::ShaderMacro GetMSAAShaderMacro() const;
-		const auto& GetSamplerState(Rendering::RenderState::SamplerState state) const { return _samplerStates[static_cast<uint>(state)]; }
+		const auto& GetSamplerState(Rendering::RenderState::SamplerState state) const { return _samplerStates[static_cast<uint32>(state)]; }
 
 	public:
 		DXSharedResource<ID3D11ShaderResourceView>	CreateShaderResourceView(ID3D11Resource* const rawResource, const D3D11_SHADER_RESOURCE_VIEW_DESC& desc);
@@ -113,9 +113,9 @@ namespace Device
 
 	private:
 		friend class Core::Launcher;
-		void Initialize(const WinApp& win, const Rect<uint>& viewport, bool useMSAA);
+		void Initialize(const WinApp& win, const Rect<uint32>& viewport, bool useMSAA);
 		void CreateRenderTargetView();
-		void CreateDeviceAndSwapChain(const WinApp& win, const Size<uint>& viewportSize, bool useMSAA);
+		void CreateDeviceAndSwapChain(const WinApp& win, const Size<uint32>& viewportSize, bool useMSAA);
 		void CreateBlendStates();
 		void Destroy();
 

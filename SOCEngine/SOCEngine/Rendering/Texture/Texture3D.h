@@ -13,9 +13,9 @@ namespace Rendering
 			Texture3D() = default;
 
 			void Initialize(Device::DirectX& dx,
-							uint width, uint height, uint depth,
+							uint32 width, uint32 height, uint32 depth,
 							DXGI_FORMAT tex3DFormat, DXGI_FORMAT srvFormat, DXGI_FORMAT uavFormat,
-							uint optionBindFlag, uint mipLevels);
+							uint32 optionBindFlag, uint32 mipLevels);
 			void Destroy();
 
 			GET_CONST_ACCESSOR_REF(ShaderResourceView,				_srv);

@@ -24,10 +24,10 @@ namespace Rendering
 				{
 					const Manager::MaterialManager&	materialMgr;
 					Texture::DepthMap&				shadowMap;
-					uint							shadowIndex;
-					uint							atlasMapResolution;
+					uint32							shadowIndex;
+					uint32							atlasMapResolution;
 
-					Param(const Manager::MaterialManager& _materialMgr, Texture::DepthMap& _shadowMap, uint _shadowIndex, uint _atlasMapResolution)
+					Param(const Manager::MaterialManager& _materialMgr, Texture::DepthMap& _shadowMap, uint32 _shadowIndex, uint32 _atlasMapResolution)
 						: materialMgr(_materialMgr), shadowMap(_shadowMap), shadowIndex(_shadowIndex), atlasMapResolution(_atlasMapResolution) { }
 				};
 

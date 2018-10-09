@@ -14,8 +14,8 @@ namespace Rendering
 			struct SemanticInfo
 			{
 				std::string	name			= "";
-				uint		semanticIndex	= -1;
-				uint		size			= 0;
+				uint32		semanticIndex	= -1;
+				uint32		size			= 0;
 			};
 
 			VertexShader() = default;

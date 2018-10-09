@@ -72,7 +72,7 @@ void SunShaft::UpdateParamCB(DirectX& dx, const ObjectManager& objMgr, const Lig
 
 	if (_changedDL)
 	{
-		uint dlIndex = lightMgr.GetIndexer<DirectionalLight>().Find(_dlObjID.Literal());
+		uint32 dlIndex = lightMgr.GetIndexer<DirectionalLight>().Find(_dlObjID.Literal());
 		_paramCBData.dlIndex = dlIndex;
 
 		_changedDL = false;

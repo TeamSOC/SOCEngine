@@ -5,7 +5,7 @@
 using namespace Core;
 using namespace Device;
 
-void Launcher::Run(const WinApp::Desc& desc, const Rect<uint>& viewport, bool useMSAA, IScene* scene)
+void Launcher::Run(const WinApp::Desc& desc, const Rect<uint32>& viewport, bool useMSAA, IScene* scene)
 {
 	{
 		WinApp win(desc);

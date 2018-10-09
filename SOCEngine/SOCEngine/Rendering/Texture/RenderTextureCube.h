@@ -10,7 +10,7 @@ namespace Rendering
 		{
 		public:
 			RenderTextureCube() = default;
-			void Initialize(Device::DirectX& dx, uint resolution, DXGI_FORMAT format);
+			void Initialize(Device::DirectX& dx, uint32 resolution, DXGI_FORMAT format);
 			void Destroy();
 
 			void GenerateMips(Device::DirectX& dx);

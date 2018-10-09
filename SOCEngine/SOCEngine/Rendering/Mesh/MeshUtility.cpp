@@ -10,7 +10,7 @@ using namespace Math;
 
 const Transform& MeshUtility::_FindTransform(ObjectID id, const TransformPool& transformPool)
 {
-	uint findIdx = transformPool.GetIndexer().Find(id.Literal());
+	uint32 findIdx = transformPool.GetIndexer().Find(id.Literal());
 	assert(findIdx != TransformPool::IndexerType::FailIndex());
 
 	return transformPool.Get(findIdx);

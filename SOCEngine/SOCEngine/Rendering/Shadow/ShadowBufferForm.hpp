@@ -26,7 +26,7 @@ namespace Rendering
 				ShadowBufferForm() = default;
 				~ShadowBufferForm() = default;
 
-				void Initialize(Device::DirectX& dx, uint maxShadowCount)
+				void Initialize(Device::DirectX& dx, uint32 maxShadowCount)
 				{
 					ViewProjMatType dummy[POINT_LIGHT_BUFFER_MAX_NUM];
 					memset(dummy, 0, sizeof(dummy));
@@ -62,7 +62,7 @@ namespace Rendering
 						const auto& base		= shadow->GetBase();
 						Core::ObjectID objID	= base->GetObjectID();
 
-						uint index						= indexer.Find(objID.Literal());
+						uint32 index						= indexer.Find(objID.Literal());
 						_paramBuffer[index]				= base->GetParam();
 						_paramBuffer[index].lightIndex	= lightPool.GetIndexer().Find(objID.Literal());
 						_transformBuffer[index]			= shadow->MakeVPMatParam(lightPool, tfPool);
@@ -79,7 +79,7 @@ namespace Rendering
 					_mustUpdateTransformSRBuffer =
 						_mustUpdateParamSRBuffer = false;
 				}
-				void Delete(uint index)
+				void Delete(uint32 index)
 				{
 					_transformBuffer.Delete(index);
 					_paramBuffer.Delete(index);

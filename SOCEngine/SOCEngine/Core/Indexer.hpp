@@ -12,17 +12,17 @@ namespace Core
 	class Indexer
 	{
 	public:
-		bool Add(const Key& key, uint index)
+		bool Add(const Key& key, uint32 index)
 		{
 			return _map.insert(std::make_pair(key, index)).second;
 		}
 
-		uint Find(const Key& key) const
+		uint32 Find(const Key& key) const
 		{
 			const auto& iter = _map.find(key);
 
 			bool found = iter != _map.end();
-			return found ? iter->second : -1;//std::numeric_limits<uint>::max();
+			return found ? iter->second : -1;//std::numeric_limits<uint32>::max();
 		}
 
 		bool Has(const Key& key) const
@@ -37,7 +37,7 @@ namespace Core
 			if (iter == _map.end())
 				return;
 
-			uint ereaseIDx = iter->second;
+			uint32 ereaseIDx = iter->second;
 			_map.erase(iter);
 
 			for (auto& mapIter : _map)
@@ -52,15 +52,15 @@ namespace Core
 			_map.clear();
 		}
 
-		static constexpr uint FailIndex() { return -1; }//std::numeric_limits<uint>::max(); }
+		static constexpr uint32 FailIndex() { return -1; }//std::numeric_limits<uint32>::max(); }
 
 	private:
 		Map	_map;
 	};
 
 	template<typename Key>
-	using IndexHashMap = Indexer<Key, std::unordered_map<Key, uint>>;
+	using IndexHashMap = Indexer<Key, std::unordered_map<Key, uint32>>;
 
 	template<typename Key>
-	using IndexMap = Indexer<Key, std::map<Key, uint>>;
+	using IndexMap = Indexer<Key, std::map<Key, uint32>>;
 }

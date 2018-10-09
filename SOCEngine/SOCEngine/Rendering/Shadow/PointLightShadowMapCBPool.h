@@ -23,15 +23,15 @@ namespace Rendering
 				void PushConstBufferToQueue();
 				void InitializePreparedCB(Device::DirectX& dx);
 
-				void Delete(uint index);
+				void Delete(uint32 index);
 				void DeleteAll();
 				
 				void UpdateSubResource(Device::DirectX& dx,
 					const std::vector<Shadow::PointLightShadow*>& dirtyShadows,
 					const ShadowDatasIndexer& indexer);
 
-				const auto& Get(uint index) const	{ return _constBuffers[index]; }
-				auto& Get(uint index)				{ return _constBuffers[index]; }
+				const auto& Get(uint32 index) const	{ return _constBuffers[index]; }
+				auto& Get(uint32 index)				{ return _constBuffers[index]; }
 
 			private:
 				std::vector<ConstBufferType>	_preparedConstBuffers;

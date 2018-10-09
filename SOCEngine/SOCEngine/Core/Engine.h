@@ -63,7 +63,7 @@ namespace Core
 		clock_t										_prevTime				= 0;
 		clock_t										_perUpdate				= 100;
 		clock_t										_elapsedTimeForUpdate	= 0;
-		uint										_frameCount				= 0;
+		uint32										_frameCount				= 0;
 		float										_fps					= 0.0f;
 		float										_elapsedTimePerFrame	= 0.0f;
 

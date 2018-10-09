@@ -50,8 +50,8 @@ namespace Rendering
 				auto& vbPool		= param.bufferMgr.GetPool<Buffer::VertexBuffer>();
 				auto& vbPerQueue	= meshes.GetQueue();
 
-				uint vbKeyCount		= vbPerQueue.GetSize();
-				for (uint i = 0; i < vbKeyCount; ++i)
+				uint32 vbKeyCount		= vbPerQueue.GetSize();
+				for (uint32 i = 0; i < vbKeyCount; ++i)
 				{
 					auto& rawPtrs	= vbPerQueue.Get(i);
 
@@ -63,8 +63,8 @@ namespace Rendering
 					assert(vb);
 					vb->IASetBuffer(dx);
 
-					uint meshCount = rawPtrs.GetSize();
-					for (uint meshIdx = 0; meshIdx < meshCount; ++meshIdx)
+					uint32 meshCount = rawPtrs.GetSize();
+					for (uint32 meshIdx = 0; meshIdx < meshCount; ++meshIdx)
 					{
 						const auto meshPtr = rawPtrs.Get(meshIdx);
 						preRenderCall(meshPtr);

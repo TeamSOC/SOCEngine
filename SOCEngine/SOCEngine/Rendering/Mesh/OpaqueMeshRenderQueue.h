@@ -18,13 +18,13 @@ namespace Rendering
 			template <class Iterator>		// Iterator Form = "[](const Mesh*) -> void { }"
 			void Iterate(Iterator iterator)
 			{
-				uint vbKeyCount = _vbPerMeshes.GetSize();
-				for (uint i = 0; i < vbKeyCount; ++i)
+				uint32 vbKeyCount = _vbPerMeshes.GetSize();
+				for (uint32 i = 0; i < vbKeyCount; ++i)
 				{
 					auto& rawPtrs = _vbPerMeshes.Get(i);
 
-					uint meshCount = rawPtrs.GetSize();
-					for (uint meshIdx = 0; meshIdx < meshCount; ++meshIdx)
+					uint32 meshCount = rawPtrs.GetSize();
+					for (uint32 meshIdx = 0; meshIdx < meshCount; ++meshIdx)
 						iterator( rawPtrs.Get(meshIdx) );
 				}
 			}			

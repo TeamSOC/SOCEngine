@@ -18,7 +18,7 @@ namespace Device
 	public:
 		struct Desc
 		{
-			Rect<uint>		rect			= Rect<uint>(0, 0, 800, 600);
+			Rect<uint32>		rect			= Rect<uint32>(0, 0, 800, 600);
 			HINSTANCE		instance		= NULL;
 			std::string		name			= "SOCEngine";
 			bool			windowMode		= false;
@@ -43,11 +43,11 @@ namespace Device
 		void Destroy();
 
 	private:
-		Rect<uint>	_rect;
+		Rect<uint32>	_rect;
 		WNDCLASSEX	_windowInfo;
 		HWND		_parentHandle;
 		HWND		_handle;
-		uint		_options;
+		uint32		_options;
 		bool		_windowsMode;
 	};
 }

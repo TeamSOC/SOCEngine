@@ -12,7 +12,7 @@ using namespace Rendering::View;
 using namespace Rendering::Manager;
 using namespace Rendering::Renderer;
 
-void OnlyLightCulling::Initialize(Device::DirectX& dx, ShaderManager& shaderMgr, const Size<uint>& maxRenderRectSize)
+void OnlyLightCulling::Initialize(Device::DirectX& dx, ShaderManager& shaderMgr, const Size<uint32>& maxRenderRectSize)
 {
 	std::vector<ShaderMacro> macros{	ShaderMacro("USE_ATOMIC", ""),
 										ShaderMacro("USE_COMPUTE_SHADER", ""),
@@ -23,8 +23,8 @@ void OnlyLightCulling::Initialize(Device::DirectX& dx, ShaderManager& shaderMgr,
 
 	// Ouput Buffer Setting
 	{
-		Size<uint> size	= CullingUtility::CalcThreadGroupSize(maxRenderRectSize);
-		uint num		= CullingUtility::CalcMaxNumLightsInTile(maxRenderRectSize) * size.w * size.h;
+		Size<uint32> size	= CullingUtility::CalcThreadGroupSize(maxRenderRectSize);
+		uint32 num		= CullingUtility::CalcMaxNumLightsInTile(maxRenderRectSize) * size.w * size.h;
 
 		_srb.Initialize(dx, 4, num, DXGI_FORMAT_R32_UINT, nullptr,  D3D11_BIND_UNORDERED_ACCESS, D3D11_USAGE_DEFAULT);
 		_uav.Initialize(dx, DXGI_FORMAT_R32_UINT, num, _srb.GetBaseBuffer().GetBuffer(), D3D11_UAV_DIMENSION_BUFFER);

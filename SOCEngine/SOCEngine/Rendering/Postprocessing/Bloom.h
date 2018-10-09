@@ -21,7 +21,7 @@ namespace Rendering
 		public:
 			struct ParamCBData
 			{
-				uint	packedDeltaTime		= 0;
+				uint32	packedDeltaTime		= 0;
 
 				float	exposureStrength	= 0.2f;
 				float	exposureSpeed		= 0.8f;
@@ -29,7 +29,7 @@ namespace Rendering
 			};
 
 		public:
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& renderSize, bool use);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& renderSize, bool use);
 			void Destroy();
 
 			void UpdateParamCB(Device::DirectX& dx);

@@ -42,7 +42,7 @@ namespace Rendering
 			};
 
 		public:
-			void Initialize(Device::DirectX& dx, Manager::BufferManager& bufferMgr, Manager::ShaderManager& shaderMgr, Manager::MaterialManager& materialMgr, uint resolution);
+			void Initialize(Device::DirectX& dx, Manager::BufferManager& bufferMgr, Manager::ShaderManager& shaderMgr, Manager::MaterialManager& materialMgr, uint32 resolution);
 			void Destroy();
 
 			void CheckRenderAbleWithUpdateCB(Device::DirectX& dx, const Manager::LightManager& lightMgr, const Camera::MainCamera& mainCam);

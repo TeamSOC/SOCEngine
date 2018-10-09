@@ -11,7 +11,7 @@ using namespace Rendering::Renderer;
 using namespace Rendering::Camera;
 using namespace Rendering::RenderState;
 
-void Bloom::Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& renderSize, bool use)
+void Bloom::Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& renderSize, bool use)
 {
 	using Param = FullScreen::InitParam;
 	
@@ -33,8 +33,8 @@ void Bloom::Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, c
 		};
 		_blur.UpdateParamCB(dx, param);
 
-		_adaptedLuminanceMaps[0].Initialize(dx, Size<uint>(1, 1), DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
-		_adaptedLuminanceMaps[1].Initialize(dx, Size<uint>(1, 1), DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
+		_adaptedLuminanceMaps[0].Initialize(dx, Size<uint32>(1, 1), DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
+		_adaptedLuminanceMaps[1].Initialize(dx, Size<uint32>(1, 1), DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_R32_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
 
 		_bloomThresholdMap.Initialize(dx, renderSize, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_R16G16B16A16_FLOAT, DXGI_FORMAT_UNKNOWN, 0, 1, 1);
 	}
@@ -99,7 +99,7 @@ void Bloom::RenderThresholdMap(DirectX& dx, const RenderTexture& inColorMap, con
 			copy.Render(dx, temp.downScaledTextures[3], *temp.downScaledTextures[2].GetTexture2D());	// /8		-> /16
 		}
 
-		for (uint i = 0; i<2; ++i)
+		for (uint32 i = 0; i<2; ++i)
 			_blur.Render(dx, temp.downScaledTextures[3], temp.downScaledTextures[3], temp.minSizeMap);
 
 		// Up Scale
@@ -133,7 +133,7 @@ void Bloom::RenderBloom(DirectX& dx, RenderTexture& outRT, const RenderTexture& 
 
 void Bloom::SetElapsedTime(float time)
 {
-	uint packedTime = 0;
+	uint32 packedTime = 0;
 
 	if (fabsf(time) <= FLT_EPSILON)
 		packedTime = 0;

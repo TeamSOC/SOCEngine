@@ -14,11 +14,11 @@ namespace Rendering
 		public:
 			struct ThreadGroup
 			{
-				uint x = 0;
-				uint y = 0;
-				uint z = 0;
+				uint32 x = 0;
+				uint32 y = 0;
+				uint32 z = 0;
 				ThreadGroup() = default;
-				ThreadGroup(uint _x, uint _y, uint _z) : x(_x), y(_y), z(_z) {}
+				ThreadGroup(uint32 _x, uint32 _y, uint32 _z) : x(_x), y(_y), z(_z) {}
 			};
 
 		public:
@@ -33,7 +33,7 @@ namespace Rendering
 			static void BindShaderResourceView(Device::DirectX& dx, TextureBindIndex bind, const View::ShaderResourceView& srv);
 			static void BindSamplerState(Device::DirectX& dx, SamplerStateBindIndex bind, RenderState::SamplerState);
 			static void BindConstBuffer(Device::DirectX& dx, ConstBufferBindIndex bind, const Buffer::ConstBuffer& cb);
-			static void BindUnorderedAccessView(Device::DirectX& dx, UAVBindIndex bind, const View::UnorderedAccessView& uav, const uint* initialCounts = nullptr);
+			static void BindUnorderedAccessView(Device::DirectX& dx, UAVBindIndex bind, const View::UnorderedAccessView& uav, const uint32* initialCounts = nullptr);
 
 			static void UnBindShaderResourceView(Device::DirectX& dx, TextureBindIndex bind);
 			static void UnBindSamplerState(Device::DirectX& dx, SamplerStateBindIndex bind);

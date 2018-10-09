@@ -32,13 +32,13 @@ void VertexBuffer::Destroy()
 	_baseBuffer.Destroy();
 }
 
-void VertexBuffer::IASetBuffer(Device::DirectX& dx, uint offset) const
+void VertexBuffer::IASetBuffer(Device::DirectX& dx, uint32 offset) const
 {
 	ID3D11Buffer* buffer	= const_cast<BaseBuffer*>(&_baseBuffer)->GetRaw();
 	dx.GetContext()->IASetVertexBuffers(0, 1, &buffer, &_desc.stride, &offset);
 }
 
-void VertexBuffer::UpdateVertexData(Device::DirectX& dx, const void* data, uint size)
+void VertexBuffer::UpdateVertexData(Device::DirectX& dx, const void* data, uint32 size)
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	ASSERT_SUCCEEDED(dx.GetContext()->Map(_baseBuffer.GetRaw(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));

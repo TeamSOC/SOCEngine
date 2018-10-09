@@ -22,10 +22,10 @@ using namespace Intersection;
 std::vector<Vector3> CalculateTangents(
 	const std::vector<Mesh::Part>& parts,
 	const std::vector<float>& vertexDatas,
-	uint originStrideSize, uint uv0PosInAttributes)
+	uint32 originStrideSize, uint32 uv0PosInAttributes)
 {
-	uint elemCountInStride	= originStrideSize / sizeof(float);
-	uint totalSize			= vertexDatas.size() / elemCountInStride;
+	uint32 elemCountInStride	= originStrideSize / sizeof(float);
+	uint32 totalSize			= vertexDatas.size() / elemCountInStride;
 
 	std::vector<Vector3> sdir(totalSize);
 	std::vector<Vector3> tdir(totalSize);
@@ -33,12 +33,12 @@ std::vector<Vector3> CalculateTangents(
 	for (auto iter = parts.begin(); iter != parts.end(); ++iter)
 	{
 		const auto& indices = iter->indices;
-		uint size = indices.size();
-		for (uint i = 0; i<size; i += 3)
+		uint32 size = indices.size();
+		for (uint32 i = 0; i<size; i += 3)
 		{
-			uint idx0 = indices[i + 0];
-			uint idx1 = indices[i + 1];
-			uint idx2 = indices[i + 2];
+			uint32 idx0 = indices[i + 0];
+			uint32 idx1 = indices[i + 1];
+			uint32 idx2 = indices[i + 2];
 
 			std::array<Vector3, 3> vertices;
 			{
@@ -91,7 +91,7 @@ std::vector<Vector3> CalculateTangents(
 	}
 
 	std::vector<Vector3> tangent(totalSize);
-	for (uint i = 0; i < totalSize; ++i)
+	for (uint32 i = 0; i < totalSize; ++i)
 	{
 		Vector3 normal(	vertexDatas[i * elemCountInStride + 0 + 3],
 						vertexDatas[i * elemCountInStride + 1 + 3],
@@ -193,8 +193,8 @@ Node MeshImporter::ParseNode(const rapidjson::Value& node,
 			return;
 		
 		const auto& partsNode = node["parts"];
-		uint size = partsNode.Size();
-		for(uint i=0; i<size; ++i)
+		uint32 size = partsNode.Size();
+		for(uint32 i=0; i<size; ++i)
 		{
 			const auto& node = partsNode[i];
 			Node::Parts parts;
@@ -206,8 +206,8 @@ Node MeshImporter::ParseNode(const rapidjson::Value& node,
 			if (node.HasMember("bones"))
 			{
 				const auto& bones = node["bones"];
-				uint size = bones.Size();
-				for (uint i = 0; i < size; ++i)
+				uint32 size = bones.Size();
+				for (uint32 i = 0; i < size; ++i)
 				{
 					const auto& boneNode = bones[i];
 
@@ -257,8 +257,8 @@ Node MeshImporter::ParseNode(const rapidjson::Value& node,
 	if(node.HasMember("children"))
 	{
 		const auto& childs = node["children"];
-		uint size = childs.Size();
-		for(uint i=0; i<size; ++i)
+		uint32 size = childs.Size();
+		for(uint32 i=0; i<size; ++i)
 		{
 			Node childNode = ParseNode(childs[i], worldMatrix, translation.has, rotation.has, scale.has);
 			currentNode.childs.push_back(childNode);
@@ -300,8 +300,8 @@ Importer::Material MeshImporter::ParseMaterial(const rapidjson::Value& matNode, 
 	if(matNode.HasMember("textures"))
 	{
 		const auto& texturesNode = matNode["textures"];
-		uint texSize = texturesNode.Size();
-		for(uint texIdx = 0; texIdx < texSize; ++texIdx)
+		uint32 texSize = texturesNode.Size();
+		for(uint32 texIdx = 0; texIdx < texSize; ++texIdx)
 		{
 			const auto& texInfoNode = texturesNode[texIdx];
 			Material::Texture texInfo;
@@ -332,13 +332,13 @@ Importer::Mesh MeshImporter::ParseMesh(	const rapidjson::Value& meshNode,
 {
 	Importer::Mesh outMesh;
 
-	uint stride			= 0;
+	uint32 stride			= 0;
 	bool hasNormal		= false;
 	bool hasTangent		= false;
 	bool hasBinormal	= false;
 
 	const auto& attributesNode = meshNode["attributes"];
-	for(uint i=0; i<attributesNode.Size(); ++i)
+	for(uint32 i=0; i<attributesNode.Size(); ++i)
 	{
 		std::string attr = attributesNode[i].GetString();
 
@@ -386,15 +386,15 @@ Importer::Mesh MeshImporter::ParseMesh(	const rapidjson::Value& meshNode,
 	// Setting Vertices
 	{
 		const auto& verticesNode = meshNode["vertices"];
-		uint size = verticesNode.Size();
+		uint32 size = verticesNode.Size();
 
 		Vector3 bbMin(10000, 10000, 10000);
 		Vector3 bbMax(-bbMin);
 
-		uint fltCountInStride = stride / sizeof(float);
-		for(uint i=0; i<size; i+=fltCountInStride)
+		uint32 fltCountInStride = stride / sizeof(float);
+		for(uint32 i=0; i<size; i+=fltCountInStride)
 		{
-			uint skipStride = 0;
+			uint32 skipStride = 0;
 
 			Vector3 pos( verticesNode[i + 0].GetDouble(),
 						 verticesNode[i + 2].GetDouble(),
@@ -439,7 +439,7 @@ Importer::Mesh MeshImporter::ParseMesh(	const rapidjson::Value& meshNode,
 					assert(!"invalid attribute");
 			}
 
-			for(uint j = skipStride; j < fltCountInStride; ++j)
+			for(uint32 j = skipStride; j < fltCountInStride; ++j)
 				outMesh.vertexDatas.push_back( verticesNode[j + i].GetDouble() );
 		}
 
@@ -449,9 +449,9 @@ Importer::Mesh MeshImporter::ParseMesh(	const rapidjson::Value& meshNode,
 	// Setting Parts
 	{
 		const auto& partsNode = meshNode["parts"];
-		uint size = partsNode.Size();
-		std::unordered_set<uint> indexHashSet;
-		for(uint i=0; i<size; ++i)
+		uint32 size = partsNode.Size();
+		std::unordered_set<uint32> indexHashSet;
+		for(uint32 i=0; i<size; ++i)
 		{
 			Mesh::Part part;
 
@@ -459,7 +459,7 @@ Importer::Mesh MeshImporter::ParseMesh(	const rapidjson::Value& meshNode,
 			part.meshPartID = node["id"].GetString();
 			
 			const auto& indicesNode = node["indices"];
-			uint indicesCount = indicesNode.Size();
+			uint32 indicesCount = indicesNode.Size();
 
 			Vector3	botOffset(0.0f, 0.0f, 0.0f);
 			bool	isSetupTranslation = false;
@@ -482,12 +482,12 @@ Importer::Mesh MeshImporter::ParseMesh(	const rapidjson::Value& meshNode,
 			Vector3	bbMin(10000, 10000, 10000);
 			Vector3	bbMax(-bbMin);
 
-			const uint lineCount	= stride / sizeof(float);
+			const uint32 lineCount	= stride / sizeof(float);
 			auto& vertices			= outMesh.vertexDatas;
-			for(uint i=0; i<indicesCount; ++i) //CW
+			for(uint32 i=0; i<indicesCount; ++i) //CW
 			{
-				uint index = indicesNode[i].GetUint();
-				uint posIdxOffsetInVertices = index * lineCount;
+				uint32 index = indicesNode[i].GetUint();
+				uint32 posIdxOffsetInVertices = index * lineCount;
 
 				float& x = vertices[posIdxOffsetInVertices + 0];
 				float& y = vertices[posIdxOffsetInVertices + 1];
@@ -552,8 +552,8 @@ void MeshImporter::ParseJson(std::vector<Importer::Mesh>& outMeshes, std::vector
 	assert(document.HasMember("nodes"));
 	{
 		const Value& nodes = document["nodes"];
-		uint size = nodes.Size();
-		for(uint i=0; i<size; ++i)
+		uint32 size = nodes.Size();
+		for(uint32 i=0; i<size; ++i)
 		{
 			Node node = ParseNode(nodes[i], Matrix::Identity());			
 			outNodes.push_back(node);
@@ -567,8 +567,8 @@ void MeshImporter::ParseJson(std::vector<Importer::Mesh>& outMeshes, std::vector
 	assert(document.HasMember("meshes"));
 	{
 		const Value& nodes = document["meshes"];
-		uint size = nodes.Size();
-		for(uint i=0; i<size; ++i)
+		uint32 size = nodes.Size();
+		for(uint32 i=0; i<size; ++i)
 		{
 			Mesh mesh = ParseMesh(nodes[i], nodeHashMap);
 			outMeshes.push_back(mesh);
@@ -579,8 +579,8 @@ void MeshImporter::ParseJson(std::vector<Importer::Mesh>& outMeshes, std::vector
 	assert(document.HasMember("materials"));	
 	{
 		const Value& nodes = document["materials"];
-		uint size = nodes.Size();
-		for(uint i=0; i<size; ++i)
+		uint32 size = nodes.Size();
+		for(uint32 i=0; i<size; ++i)
 		{
 			Material mat = ParseMaterial(nodes[i], isObjFormat);
 			outMaterials.push_back(mat);
@@ -604,7 +604,7 @@ ObjectID MeshImporter::Load(const ManagerParam&& managerParam, const std::string
 	std::ifstream g3dFile;
 	std::string g3dFileFormat;
 	const std::string supportedFileFormat[] = {"g3dj", /*"g3db"*/};
-	for(uint i=0; i<ARRAYSIZE(supportedFileFormat); ++i)
+	for(uint32 i=0; i<ARRAYSIZE(supportedFileFormat); ++i)
 	{
 		g3dFileFormat = supportedFileFormat[i];
 
@@ -623,7 +623,7 @@ ObjectID MeshImporter::Load(const ManagerParam&& managerParam, const std::string
 	std::streamoff length = g3dFile.tellg();
 	g3dFile.seekg(0, g3dFile.beg);
 
-	char* buffer = new char[(uint)length + 1];
+	char* buffer = new char[(uint32)length + 1];
 	{
 		g3dFile.read(buffer, length);
 		buffer[length] = '\0';
@@ -665,10 +665,10 @@ Core::ObjectID MeshImporter::BuildMesh(
 
 	// Setting VB, IB
 	{
-		uint meshIndex = 0;
+		uint32 meshIndex = 0;
 		for(auto meshIter = meshes.begin(); meshIter != meshes.end(); ++meshIter, ++meshIndex)
 		{
-			uint vbKey = Utility::String::MakeKey({ meshFileName , std::to_string(meshIndex) });
+			uint32 vbKey = Utility::String::MakeKey({ meshFileName , std::to_string(meshIndex) });
 
 			std::vector<std::string> meshPartIDKeys;
 
@@ -686,7 +686,7 @@ Core::ObjectID MeshImporter::BuildMesh(
 
 					auto& ibPool = managerParam.bufferManager.GetPool<IndexBuffer>();
 
-					uint ibKey = Utility::String::MakeKey({ meshFileName, partsIter->meshPartID });
+					uint32 ibKey = Utility::String::MakeKey({ meshFileName, partsIter->meshPartID });
 					ibPool.Add(ibKey, indexBuffer);
 
 					meshPartIDKeys.push_back(partsIter->meshPartID);
@@ -724,15 +724,15 @@ Core::ObjectID MeshImporter::BuildMesh(
 			{
 				auto& attributes = meshIter->attributes;
 
-				uint stride	= 0;
-				uint uv0Pos	= 0;
+				uint32 stride	= 0;
+				uint32 uv0Pos	= 0;
 				{
-					uint prevStride = 0;
+					uint32 prevStride = 0;
 					for(auto iter = attributes.begin(); iter != attributes.end(); ++iter)
 					{
 						std::string attr = *iter;
 
-						uint semanticIndex = 0;
+						uint32 semanticIndex = 0;
 
 						if(attr == "POSITION")		stride += sizeof(Vector3);
 						else if(attr == "NORMAL")	stride += sizeof(Vector3);
@@ -753,7 +753,7 @@ Core::ObjectID MeshImporter::BuildMesh(
 							{
 								return (attr.find(getAttrStr) == 0) & (attr.size() > getAttrStr.size());
 							};
-							auto GetAttributeIndex = [](const std::string& attr) -> uint
+							auto GetAttributeIndex = [](const std::string& attr) -> uint32
 							{
 								std::string numStr = "";
 								for(auto iter = attr.rbegin(); iter != attr.rend(); ++iter)
@@ -804,7 +804,7 @@ Core::ObjectID MeshImporter::BuildMesh(
 				{
 					//tangent를 버퍼에 끼워넣는 작업.
 
-					uint originStride = stride;
+					uint32 originStride = stride;
 					stride += sizeof(Vector3);
 					auto& vertexDatas = meshIter->vertexDatas;
 
@@ -813,15 +813,15 @@ Core::ObjectID MeshImporter::BuildMesh(
 
 					// Tangent를 쓴다는건, 이미 앞에 Normal을 사용한다는 것과 같다.
 					// 그래서 그냥 고정값임. 사실은 귀찮기도하고, 그래 귀찮다.
-					const uint tangentOrder = (uint)Attribute::Tangent;
+					const uint32 tangentOrder = (uint32)Attribute::Tangent;
 
-					//const uint originElemCount = originStride / sizeof(float);
-					const uint next = originStride / sizeof(float);
-					uint size = vertexDatas.size();
+					//const uint32 originElemCount = originStride / sizeof(float);
+					const uint32 next = originStride / sizeof(float);
+					uint32 size = vertexDatas.size();
 
-					uint tanIdx = 0;
-					uint start = (sizeof(Vector3) * 2) / sizeof(float);
-					for(uint i= start; i<size; i+=next)
+					uint32 tanIdx = 0;
+					uint32 start = (sizeof(Vector3) * 2) / sizeof(float);
+					for(uint32 i= start; i<size; i+=next)
 					{
 						const Vector3& tangent = tangents[tanIdx++];
 
@@ -957,7 +957,7 @@ void MeshImporter::MakeHierarchy(	Device::DirectX& dx,
 	auto& objManager	= managerParam.objManager;
 	Object object		= objManager.Acquire(node.id);
 
-	uint objID			= object.GetObjectID().Literal();
+	uint32 objID			= object.GetObjectID().Literal();
 	objManager.Find(parentID)->AddChild(object);
 
 	// Setting Transform
@@ -986,11 +986,11 @@ void MeshImporter::MakeHierarchy(	Device::DirectX& dx,
 		auto& buferMgr		= managerParam.bufferManager;
 		auto& materialMgr	= managerParam.materialManager;
 
-		uint ibKey = Utility::String::MakeKey({ meshFileName, part.meshPartID });
+		uint32 ibKey = Utility::String::MakeKey({ meshFileName, part.meshPartID });
 		IndexBuffer* indexBuffer = buferMgr.GetPool<IndexBuffer>().Find(ibKey);
 		assert(indexBuffer); // "Error, Invalid mesh part id"
 
-		uint vbKey = indexBuffer->GetVBKey();
+		uint32 vbKey = indexBuffer->GetVBKey();
 		assert(vbKey != -1); // "Error, Can't find VB. Invalid VBKey"
 
 		VertexBuffer* vertexBuffer = buferMgr.GetPool<VertexBuffer>().Find(vbKey);
@@ -1010,7 +1010,7 @@ void MeshImporter::MakeHierarchy(	Device::DirectX& dx,
 	// attach submesh and mesh component.
 	{
 		const auto& parts	= node.parts;
-		uint size			= parts.size();
+		uint32 size			= parts.size();
 
 		if(size > 1)
 		{

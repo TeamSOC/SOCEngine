@@ -5,9 +5,9 @@ using namespace Device;
 using namespace Rendering;
 using namespace Rendering::Texture;
 
-void DepthMapCube::Initialize(DirectX& dx, const Size<uint>& size, bool useSRV)
+void DepthMapCube::Initialize(DirectX& dx, const Size<uint32>& size, bool useSRV)
 {
-	uint bindFlag =	D3D11_BIND_DEPTH_STENCIL | (useSRV ? D3D11_BIND_SHADER_RESOURCE : 0);
+	uint32 bindFlag =	D3D11_BIND_DEPTH_STENCIL | (useSRV ? D3D11_BIND_SHADER_RESOURCE : 0);
 
 	D3D11_TEXTURE2D_DESC texDesc;
 	memset(&texDesc, 0, sizeof(D3D11_TEXTURE2D_DESC));

@@ -29,7 +29,7 @@ namespace Rendering
 			void Delete(Core::ObjectID objID)
 			{
 				auto& pool = GetPool<LightType>();
-				uint index = pool.GetIndexer().Find(objID.Literal());
+				uint32 index = pool.GetIndexer().Find(objID.Literal());
 
 				GetBuffer<LightType>().Delete(index);
 				pool.Delete(objID.Literal());
@@ -77,7 +77,7 @@ namespace Rendering
 				_changedLightCounts = true;
 			}
 
-			uint GetPackedLightCount() const;
+			uint32 GetPackedLightCount() const;
 
 			void UpdateTransformBuffer(const Core::TransformPool& transformPool);
 			void UpdateParamBuffer(const ShadowManager& shadowMgr);
@@ -106,7 +106,7 @@ namespace Rendering
 			{
 				return GetPool<LightType>().GetIndexer();
 			}
-			template <class LightType> uint GetLightCount() const
+			template <class LightType> uint32 GetLightCount() const
 			{
 				return GetPool<LightType>().GetSize();
 			}

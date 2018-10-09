@@ -52,7 +52,7 @@ namespace Core
 		void ActivateSkyBox(const std::string& cubeTexturePath, const std::string& materialKey);
 
 		// SkyScattering
-		void ActivateSkyScattering(uint resolution, const Object& directionalLight);
+		void ActivateSkyScattering(uint32 resolution, const Object& directionalLight);
 		void DeactivateSkyScattering();
 
 		// PostProcessing

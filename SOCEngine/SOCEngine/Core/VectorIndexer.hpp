@@ -25,7 +25,7 @@ namespace Core
 
 		Object& Add(const Key& key, Object& object)
 		{
-			uint idx			= _vector.size();
+			uint32 idx			= _vector.size();
 			bool noDuplicated	= _indexer.Add(key, idx);
 			assert(noDuplicated);
 
@@ -50,7 +50,7 @@ namespace Core
 
 		const Object* Find(const Key& key) const
 		{
-			uint findIndex = _indexer.Find(key);
+			uint32 findIndex = _indexer.Find(key);
 			bool isFound = findIndex != decltype(_indexer)::FailIndex();
 			return isFound ? &Get(findIndex) : nullptr;
 		}
@@ -67,11 +67,11 @@ namespace Core
 
 		void Delete(const Key& key)
 		{
-			uint findIdx = _indexer.Find(key);
+			uint32 findIdx = _indexer.Find(key);
 			if (findIdx == IndexerType::FailIndex())
 				return;
 
-			uint ereaseIdx = findIdx;
+			uint32 ereaseIdx = findIdx;
 			_vector.erase(_vector.begin() + ereaseIdx);
 			_indexer.Delete(key);
 		}

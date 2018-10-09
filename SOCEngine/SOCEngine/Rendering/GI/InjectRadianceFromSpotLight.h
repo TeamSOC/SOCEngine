@@ -10,7 +10,7 @@ namespace Rendering
 		class InjectRadianceFromSpotLight final
 		{
 		public:
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, uint dimension);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, uint32 dimension);
 			void Inject(Device::DirectX& dx, VoxelMap& outVoxelMap,
 						const Manager::LightManager& lightMgr,
 						const Renderer::ShadowSystem& shadowParam,
@@ -18,7 +18,7 @@ namespace Rendering
 
 		private:
 			Shader::ComputeShader	_shader;
-			uint					_threadLength = 0;
+			uint32					_threadLength = 0;
 		};
 	}
 }

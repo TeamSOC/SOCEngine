@@ -20,7 +20,7 @@ namespace Rendering
 			};
 
 		public:
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& size, DXGI_FORMAT format);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& size, DXGI_FORMAT format);
 			void Render(Device::DirectX& dx, Texture::RenderTexture& outResultRT,
 						const Texture::DepthMap& depthMap, const Texture::RenderTexture& inputColorMap,
 						Texture::RenderTexture& tempMap) const;

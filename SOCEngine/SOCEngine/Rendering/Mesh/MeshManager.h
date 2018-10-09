@@ -108,7 +108,7 @@ namespace Rendering
 			void ChangeTrait(Core::ObjectID id,
 				FromMeshPool& fromPool, ToMeshPool& toPool)
 			{
-				uint literlID = id.Literal();
+				uint32 literlID = id.Literal();
 				assert(fromPool.Has(literlID));
 				assert(toPool.Has(literlID) == false);
 

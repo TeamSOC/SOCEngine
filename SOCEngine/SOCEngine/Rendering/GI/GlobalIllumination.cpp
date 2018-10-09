@@ -7,7 +7,7 @@ using namespace Rendering::Manager;
 using namespace Rendering::GI;
 using namespace Rendering::Texture;
 
-void GlobalIllumination::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint>& renderSize, const GIInitParam& giParam)
+void GlobalIllumination::Initialize(DirectX& dx, ShaderManager& shaderMgr, const Size<uint32>& renderSize, const GIInitParam& giParam)
 {
 	if (giParam.GetUseVXGI())
 	{

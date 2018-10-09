@@ -17,7 +17,7 @@ namespace Rendering
 			void SetVXGI_VoxelizeCenterPos(const Math::Vector3& pos) { _vxgi.SetStartCenterWorldPos(pos); }
 
 		public:
-			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint>& renderSize, const GIInitParam& giParam);
+			void Initialize(Device::DirectX& dx, Manager::ShaderManager& shaderMgr, const Size<uint32>& renderSize, const GIInitParam& giParam);
 			void Destroy();
 
 			void Run(Device::DirectX& dx, const GI::VXGI::Param&& param);

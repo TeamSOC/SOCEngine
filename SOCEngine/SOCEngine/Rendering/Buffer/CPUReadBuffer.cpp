@@ -5,7 +5,7 @@ using namespace Rendering::View;
 using namespace Rendering::Buffer;
 using namespace Device;
 
-void CPUReadBuffer::Initialize(Device::DirectX& dx, uint stride, uint num, DXGI_FORMAT format)
+void CPUReadBuffer::Initialize(Device::DirectX& dx, uint32 stride, uint32 num, DXGI_FORMAT format)
 {
 	D3D11_BUFFER_DESC desc;
 	memset(&desc, 0, sizeof(D3D11_BUFFER_DESC));

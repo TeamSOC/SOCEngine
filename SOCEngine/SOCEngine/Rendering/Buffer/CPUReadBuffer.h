@@ -15,7 +15,7 @@ namespace Rendering
 		public:
 			CPUReadBuffer() = default;
 
-			void Initialize(Device::DirectX& dx, uint stride, uint num, DXGI_FORMAT format);
+			void Initialize(Device::DirectX& dx, uint32 stride, uint32 num, DXGI_FORMAT format);
 			void Read(Device::DirectX& dx, const std::function<void(const void* dataRecive)>& dataReceiveFunc);
 
 			GET_CONST_ACCESSOR_REF(Buffer,	_baseBuffer);
